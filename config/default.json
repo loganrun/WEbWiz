@@ -1,3 +1,4 @@
 {
-  "mongoURI": "mongodb+srv://LoganNew:AgoLngtoLauNch3B@whizz1-7dh5i.mongodb.net/Whizbase?retryWrites=true&w=majority"
+  "mongoURI": "mongodb+srv://LoganNew:AgoLngtoLauNch3B@whizz1-7dh5i.mongodb.net/Whizbase?retryWrites=true&w=majority",
+  "jwtSecret": "RobbieBighead"
 }

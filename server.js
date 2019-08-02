@@ -7,7 +7,8 @@ connectDB();
 app.use(express.json({ extended: false }));
 
 app.get("/", (req, res) => res.send("API running"));
-
+app.use("/api/auth", require("./routes/api/auth"));
+app.use("/api/users", require("./routes/api/users"));
 app.use("/api/bathrooms", require("./routes/api/bathroom"));
 app.use("/api/restaurants", require("./routes/api/restaurant"));
 app.use("/api/bathReview", require("./routes/api/bathReview"));
