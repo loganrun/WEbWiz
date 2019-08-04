@@ -16,6 +16,10 @@ const BathroomSchema = new mongoose.Schema({
   coordinates: {
     latitude: Number,
     Longitude: Number
+  },
+  date: {
+    type: Date,
+    default: Date.now
   }
 });
 

@@ -25,6 +25,14 @@ const RestaurantSchema = new mongoose.Schema({
     Friday: String,
     Saturday: String,
     Sunday: String
+  },
+  date: {
+    type: Date,
+    default: Date.now
+  },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "users"
   }
 });
 

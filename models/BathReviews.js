@@ -17,6 +17,10 @@ const BathReviewsSchema = new mongoose.Schema({
   },
   profile_Name: {
     type: String
+  },
+  date: {
+    type: Date,
+    default: Date.now
   }
 });
 
