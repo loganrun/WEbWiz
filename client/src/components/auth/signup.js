@@ -2,12 +2,15 @@ import React from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
+import {TextField, CheckboxWithLabel} from "formik-material-ui";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
+import {Formik,Form,Field} from "formik"
+import * as yup from "yup"
+//import Box from "@material-ui/core/Box";
+
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
@@ -40,6 +43,28 @@ const useStyles = makeStyles(theme => ({
 
 export default function SignUp() {
   const classes = useStyles();
+  const validationSchema = yup.object().shape({
+    email: yup
+      .string()
+      .email()
+      .label("Email")
+      .required(),
+    password: yup
+      .string()
+      .label("Password")
+      .required()
+      .min(7)
+      .max(20),
+    firstName: yup
+      .string()
+      .label("First name")
+      .required(),
+    lastName: yup
+      .string()
+      .label("Last name")
+      .required()
+  });
+  
 
   return (
     <Container component='main' maxWidth='xs'>
@@ -51,10 +76,29 @@ export default function SignUp() {
         <Typography component='h1' variant='h5'>
           Sign up
         </Typography>
-        <form className={classes.form} noValidate>
+        <Formik
+        initialValues={{
+          firstName: "",
+          lastName: "",
+          email: "",
+          password: "",
+          promotions: false
+        }}
+        onSubmit={(values, { setSubmitting, resetForm}) => {
+          console.log(values)
+          resetForm()
+          // setTimeout(() => {
+          //   alert(JSON.stringify(values, null, 2));
+          //   setSubmitting(false);
+          // }, 1400);
+        }}
+        validationSchema={validationSchema}
+      >
+        {formikProps => (
+        <Form className={classes.form} submit="onSubmit">
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-              <TextField
+              <Field
                 autoComplete='fname'
                 name='firstName'
                 variant='outlined'
@@ -62,56 +106,73 @@ export default function SignUp() {
                 fullWidth
                 id='firstName'
                 label='First Name'
-                autoFocus
+                component={TextField}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField
+              <Field
                 variant='outlined'
                 required
                 fullWidth
                 id='lastName'
+                //onChange={handleChange}
+                //onBlur={handleBlur}
+                //value={values.lastName}
                 label='Last Name'
                 name='lastName'
                 autoComplete='lname'
+                component={TextField}
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
+              <Field
                 variant='outlined'
                 required
                 fullWidth
                 id='email'
+                //onChange={handleChange}
+                //onBlur={handleBlur}
+                //value={values.email}
                 label='Email Address'
                 name='email'
                 autoComplete='email'
+                component={TextField}
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
+              <Field
                 variant='outlined'
                 required
                 fullWidth
                 name='password'
+                //onChange={handleChange}
+                //onBlur={handleBlur}
+                //value={values.password}
                 label='Password'
                 type='password'
                 id='password'
                 autoComplete='current-password'
+                component={TextField}
               />
             </Grid>
             <Grid item xs={12}>
               <FormControlLabel
-                control={<Checkbox value='allowExtraEmails' color='primary' />}
-                label='I want to receive inspiration, marketing promotions and updates via email.'
+                control={<Checkbox  color='primary' />}
+                label='I want to receive coupons, special discounts, promotions and updates via email.'
+                name="promotions"
+                component={CheckboxWithLabel}
               />
             </Grid>
           </Grid>
           <Button
             type='submit'
             fullWidth
+            //onClick={formikProps.handleSubmit}
             variant='contained'
             color='primary'
+            //disableFocusRipple={isSubmitting}
             className={classes.submit}
+            //onClick={}
           >
             Sign Up
           </Button>
@@ -122,7 +183,9 @@ export default function SignUp() {
               </Link>
             </Grid>
           </Grid>
-        </form>
+        </Form>
+        )}
+        </Formik>
       </div>
     </Container>
   );
