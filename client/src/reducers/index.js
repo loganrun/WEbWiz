@@ -1,7 +1,8 @@
-import {combineReducers} from 'redux'
-import alert from './alert'
-
+import { combineReducers } from "redux";
+import { firebaseReducer } from "react-redux-firebase";
+import alert from "./alert";
 
 export default combineReducers({
-    alert
+  alert,
+  firebase: firebaseReducer
 });
