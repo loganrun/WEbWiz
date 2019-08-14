@@ -16,7 +16,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { actionTypes } from "react-redux-firebase";
+//import { actionTypes } from "react-redux-firebase";
 
 const useStyles = makeStyles(theme => ({
   "@global": {
@@ -83,21 +83,19 @@ const SignUp = ({ signUp }) => {
             lastName: "",
             email: "",
             password: "",
-            promotions: false
+            promotions: true
           }}
-          onSubmit={(values, { setSubmitting, resetForm }) => {
+          onSubmit={async (values, { setSubmitting, resetForm }) => {
             console.log(values);
-            signUp(values);
+            await signUp(values);
+            setSubmitting(false);
             resetForm();
-            // setTimeout(() => {
-            //   alert(JSON.stringify(values, null, 2));
-            //   setSubmitting(false);
-            // }, 1400);
+            
           }}
           validationSchema={validationSchema}
         >
-          {formikProps => (
-            <Form className={classes.form} submit='onSubmit'>
+          {({handleSubmit, isSubmitting}) => (
+            <Form className={classes.form} onSubmit={handleSubmit}>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <Field
@@ -117,9 +115,6 @@ const SignUp = ({ signUp }) => {
                     required
                     fullWidth
                     id='lastName'
-                    //onChange={handleChange}
-                    //onBlur={handleBlur}
-                    //value={values.lastName}
                     label='Last Name'
                     name='lastName'
                     autoComplete='lname'
@@ -132,9 +127,6 @@ const SignUp = ({ signUp }) => {
                     required
                     fullWidth
                     id='email'
-                    //onChange={handleChange}
-                    //onBlur={handleBlur}
-                    //value={values.email}
                     label='Email Address'
                     name='email'
                     autoComplete='email'
@@ -147,9 +139,6 @@ const SignUp = ({ signUp }) => {
                     required
                     fullWidth
                     name='password'
-                    //onChange={handleChange}
-                    //onBlur={handleBlur}
-                    //value={values.password}
                     label='Password'
                     type='password'
                     id='password'
@@ -169,12 +158,10 @@ const SignUp = ({ signUp }) => {
               <Button
                 type='submit'
                 fullWidth
-                //onClick={formikProps.handleSubmit}
                 variant='contained'
                 color='primary'
-                //disableFocusRipple={isSubmitting}
+                disabled={isSubmitting}
                 className={classes.submit}
-                //onClick={}
               >
                 Sign Up
               </Button>

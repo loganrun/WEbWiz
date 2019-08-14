@@ -1,1 +1,2 @@
-export { signUp } from "./auth";
+export { signUp } from "./fireAuth";
+export {signIn} from './fireAuth'

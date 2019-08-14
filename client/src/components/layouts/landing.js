@@ -44,23 +44,4 @@ export class landing extends Component {
 
 export default landing;
 
-{
-  /* <video
-          className='videoTag'
-          autoPlay
-          loop
-          muted
-          style={{
-            top: "0",
-            left: "0",
-            objectFit: "cover",
-            // right: "0",
-            position: "absolute",
-            overFlow: "hidden",
-            height: "100%"
-            //flex: 1
-          }}
-        >
-          <source src={Vid} type='video/mp4' />
-        </video> */
-}
+

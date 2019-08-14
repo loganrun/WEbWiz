@@ -14,6 +14,8 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import *as actions from '../../actions'
+import {connect} from 'react-redux'
 
 const useStyles = makeStyles(theme => ({
   "@global": {
@@ -40,7 +42,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function SignIn() {
+const SignIn = ({signIn}) => {
   const classes = useStyles();
   const validationSchema = yup.object().shape({
     email: yup
@@ -56,14 +58,15 @@ export default function SignIn() {
 
   return (
     <Formik initialValues={{email: "", password: ""}} validationSchema = {validationSchema} 
-    onSubmit={(values, { setSubmitting, resetForm}) => {
-      setSubmitting(true)
+    onSubmit={async (values, { setSubmitting, resetForm}) => {
+     try{
       console.log(values)
+      await signIn(values)
+      setSubmitting(false)
       resetForm()
-      // setTimeout(() => {
-      //   alert(JSON.stringify(values, null, 2));
-      //   setSubmitting(false);
-      // }, 1400);
+     }catch(err){
+       console.log(err.message)
+     }
     }}
     >
       {({handleSubmit, isSubmitting}) =>(
@@ -136,3 +139,11 @@ export default function SignIn() {
     </Formik>
   );
 }
+
+const mapStateToProps = state =>({})
+
+const mapDispatchToProps = {
+  signIn: actions.signIn
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn)
