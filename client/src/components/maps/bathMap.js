@@ -1,20 +1,16 @@
-import React from 'react';
-import Map from './map'
-import Navbar from '../layouts/mainNavBar'
+import React from "react";
+import Map from "./map";
+import Navbar from "../layouts/mainNavBar";
+import Drawer from "../layouts/drawer";
 
-
-
-
-const bathMap = ()=>{
-return(
+const bathMap = () => {
+  return (
     <div>
-    <Navbar/>
-    <Map/>
+      <Navbar />
+      <Drawer />
+      <Map />
     </div>
-)
+  );
+};
 
-
-
-}
-
-export default bathMap
+export default bathMap;
