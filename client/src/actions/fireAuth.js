@@ -32,3 +32,11 @@ export const signIn = data => async (dispatch, getState, { getFirebase }) => {
       
   };
   
+  export const signOut = () => async (dispatch, getState, { getFirebase }) => {
+    const firebase = getFirebase();
+    try {
+      await firebase.auth().signOut();
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
