@@ -3,12 +3,13 @@ import Map from "./map";
 import Navbar from "../layouts/mainNavBar";
 import Drawer from "../layouts/drawer";
 import { makeStyles } from "@material-ui/core/styles";
+import Loading from '../layouts/loading'
 //import Typography from '@material-ui/core/Typography';
 //import Paper from '@material-ui/core/Paper';
 //import Divider from '@material-ui/core/Divider';
 import Grid from "@material-ui/core/Grid";
 import BathList from "../maps/bathList";
-import {usePosition} from '../../utils/position';
+//import {usePosition} from '../../utils/position';
 import *as actions from '../../actions'
 import { connect } from "react-redux";
 import axios from "axios";
@@ -36,17 +37,18 @@ const gridStyles = makeStyles(theme => ({
 
     //initialLocation(position)
 
-const BathMap = ({initialLocation}) => {
+const BathMap = ({loadBathroom}) => {
+  const [loading, setLoading] = useState({ loading: true})
 
   const [data, setData] = useState({ bathrooms: [] });
 
   
-  const position = usePosition(true);
-    console.log(position)
-    initialLocation(position)
+  // const position = usePosition(true);
+  //   console.log(position)
+  //   initialLocation(position)
 
   
-  useEffect( (position) => {
+  useEffect( () => {
     const params = {
       page: 1,
       per_page: 30,
@@ -66,12 +68,22 @@ const BathMap = ({initialLocation}) => {
     const fetchData = async () => {
     const result = await restRoom.get("/by_location", { params })
     console.log(result)
-  setData(result.data);
+  await setData(result.data);
+  await loadBathroom(result)
+  
+  setLoading(false)
       }
     fetchData()}, []);
 
   const classes = gridStyles();
+  
+  if(loading){
+
+    return <Loading />
+
+  }
   return (
+    
     <div>
       <Navbar />
       <Drawer />
@@ -87,8 +99,14 @@ const BathMap = ({initialLocation}) => {
   );
 };
 
+const mapStateToProps = state =>({
+  latitude: state.location.latitude,
+  longitude:  state.location.longitude
+})
+
 const mapDispatchToProps = {
-  initialLocation: actions.initialLocation
+  //initialLocation: actions.initialLocation,
+  loadBathroom: actions.loadBathrooms
 }
 
-export default connect(null,mapDispatchToProps)(BathMap);
+export default connect(mapStateToProps,mapDispatchToProps)(BathMap);

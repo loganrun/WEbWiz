@@ -1,16 +1,23 @@
 import React from 'react';
 import {GoogleMap, withScriptjs,withGoogleMap} from 'react-google-maps';
 import mapStyles from './mapStyles'
-//import {connect} from 'react-redux'
+import {connect} from 'react-redux'
 //import { connect } from 'formik';
 
 
 
 
-const GMap = ()=>{
+const GMap = (props)=>{
 return(
     <div>
-    <GoogleMap defaultZoom={12}  defaultCenter={{lat:  33.986014, lng:-118.3668194}} defaultOptions={{styles: mapStyles}}/>
+    <GoogleMap defaultZoom={12}  defaultCenter={{lat:  33.986014, lng:-118.3668194}} defaultOptions={{styles: mapStyles}}>
+
+        {/* {props.marker.map((bath) => (
+            <Marker key={bath.id} position={{lat: bath.latitude, lng: bath.longitude}}/>
+
+        ))} */}
+
+    </GoogleMap>
     </div>
 )
 
@@ -32,9 +39,10 @@ const Map = () =>{
         </div>
     )
 }
-// const mapStateToProps = state =>({
-//     latitude: state.position.latitude,
-//     longitude: state.position.longitude
-// })
+ const mapStateToProps = state =>({
+     //latitude: state.location.position.latitude,
+     //longitude: state.location.position.longitude,
+     //marker: state.bathroom.payload.data
+ })
 
-export default Map
+export default connect(mapStateToProps)(Map)

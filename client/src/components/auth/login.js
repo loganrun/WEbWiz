@@ -42,7 +42,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const SignIn = ({signIn}) => {
+const SignIn = ({signIn}, props) => {
   const classes = useStyles();
   const validationSchema = yup.object().shape({
     email: yup
@@ -64,6 +64,7 @@ const SignIn = ({signIn}) => {
       await signIn(values)
       setSubmitting(false)
       resetForm()
+      props.history.push("/bathMap")
      }catch(err){
        console.log(err.message)
      }

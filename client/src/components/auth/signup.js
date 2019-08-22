@@ -9,13 +9,14 @@ import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import { Formik, Form, Field } from "formik";
 import * as yup from "yup";
-import * as actions from "../../actions";
-import { connect } from "react-redux";
+//import * as actions from "../../actions";
+//import { connect } from "react-redux";
 
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import {withRouter} from 'react-router-dom'
 //import { actionTypes } from "react-redux-firebase";
 
 const useStyles = makeStyles(theme => ({
@@ -43,7 +44,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const SignUp = ({ signUp }) => {
+const SignUp = ( props) => {
   const classes = useStyles();
   const validationSchema = yup.object().shape({
     email: yup
@@ -87,9 +88,10 @@ const SignUp = ({ signUp }) => {
           }}
           onSubmit={async (values, { setSubmitting, resetForm }) => {
             console.log(values);
-            await signUp(values);
+            //await signUp(values);
             setSubmitting(false);
             resetForm();
+            props.history.push("/bathMap")
             
           }}
           validationSchema={validationSchema}
@@ -180,13 +182,15 @@ const SignUp = ({ signUp }) => {
   );
 };
 
-const mapStateToProps = state => ({});
+// const mapStateToProps = state => ({});
 
-const mapDispatchToProps = {
-  signUp: actions.signUp
-};
+// const mapDispatchToProps = {
+//   signUp: actions.signUp
+// };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SignUp);
+export default withRouter(SignUp);
+
+// connect(
+//   mapStateToProps,
+//   mapDispatchToProps
+// )(
