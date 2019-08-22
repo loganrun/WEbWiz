@@ -3,12 +3,13 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Landing from "./components/layouts/landing";
 import Signup from "./components/auth/signup";
 import Login from "./components/auth/login";
-import bathMap from './components/maps/bathMap'
+import bathMap from './components/maps/bathMap';
+//import {connect} from 'react-redux'
 import {Provider} from 'react-redux';
 import store from './store';
 
 
-function App() {
+const App = () =>{
   return (
     <Provider store={store}>
     <Router>
@@ -26,6 +27,12 @@ function App() {
     </Provider>
   
   );
-}
+};
+
+// const mapStateToProps = ({ firebase }) => ({
+//   loggedIn: firebase.auth.uid,
+//   //emailVerified: firebase.auth.emailVerified,
+// });
+
 
 export default App;

@@ -22,7 +22,7 @@ export default function ButtonAppBar() {
 
   return (
     <div className={classes.root}>
-      <AppBar position='static' elevation='0'>
+      <AppBar position='static'>
         <Toolbar>
           <Typography variant='h6' className={classes.title}>
             WHIZZ
@@ -35,7 +35,7 @@ export default function ButtonAppBar() {
             variant='body2'
             style={{ color: "white", fontSize: 20 }}
           >
-            <Button variant='outlined'size ='medium' color= 'inerit'style={{backgroundColor:'white', opacity: .9, marginLeft: 10 }}>Here</Button>
+            <Button variant='outlined' size ='medium' style={{backgroundColor:'white', opacity: .9, marginLeft: 10 }}>Here</Button>
           </Link>
         </Toolbar>
       </AppBar>

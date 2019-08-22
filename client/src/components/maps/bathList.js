@@ -11,8 +11,12 @@ import Typography from "@material-ui/core/Typography";
 const listStyles = makeStyles(theme => ({
   root: {
     width: "100%",
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper
+    //maxWidth: 360,
+    backgroundColor: theme.palette.background.paper,
+    overflow: "scroll",
+    postion: "absolute",
+    marginTop: 70
+
   },
   inline: {
     display: "inline"
@@ -24,6 +28,270 @@ export default function AlignItemsList() {
 
   return (
     <List className={classes.root}>
+      <ListItem alignItems='flex-start'>
+        <ListItemAvatar>
+          <Avatar alt='Remy Sharp' src='/static/images/avatar/1.jpg' />
+        </ListItemAvatar>
+        <ListItemText
+          primary='Brunch this weekend?'
+          secondary={
+            <React.Fragment>
+              <Typography
+                component='span'
+                variant='body2'
+                className={classes.inline}
+                color='textPrimary'
+              >
+                Ali Connors
+              </Typography>
+              {" — I'll be in your neighborhood doing errands this…"}
+            </React.Fragment>
+          }
+        />
+      </ListItem>
+      <Divider variant='inset' component='li' />
+      <ListItem alignItems='flex-start'>
+        <ListItemAvatar>
+          <Avatar alt='Remy Sharp' src='/static/images/avatar/1.jpg' />
+        </ListItemAvatar>
+        <ListItemText
+          primary='Brunch this weekend?'
+          secondary={
+            <React.Fragment>
+              <Typography
+                component='span'
+                variant='body2'
+                className={classes.inline}
+                color='textPrimary'
+              >
+                Ali Connors
+              </Typography>
+              {" — I'll be in your neighborhood doing errands this…"}
+            </React.Fragment>
+          }
+        />
+      </ListItem>
+      <Divider variant='inset' component='li' />
+      <ListItem alignItems='flex-start'>
+        <ListItemAvatar>
+          <Avatar alt='Remy Sharp' src='/static/images/avatar/1.jpg' />
+        </ListItemAvatar>
+        <ListItemText
+          primary='Brunch this weekend?'
+          secondary={
+            <React.Fragment>
+              <Typography
+                component='span'
+                variant='body2'
+                className={classes.inline}
+                color='textPrimary'
+              >
+                Ali Connors
+              </Typography>
+              {" — I'll be in your neighborhood doing errands this…"}
+            </React.Fragment>
+          }
+        />
+      </ListItem>
+      <Divider variant='inset' component='li' />
+      <ListItem alignItems='flex-start'>
+        <ListItemAvatar>
+          <Avatar alt='Remy Sharp' src='/static/images/avatar/1.jpg' />
+        </ListItemAvatar>
+        <ListItemText
+          primary='Brunch this weekend?'
+          secondary={
+            <React.Fragment>
+              <Typography
+                component='span'
+                variant='body2'
+                className={classes.inline}
+                color='textPrimary'
+              >
+                Ali Connors
+              </Typography>
+              {" — I'll be in your neighborhood doing errands this…"}
+            </React.Fragment>
+          }
+        />
+      </ListItem>
+      <Divider variant='inset' component='li' />
+      <ListItem alignItems='flex-start'>
+        <ListItemAvatar>
+          <Avatar alt='Remy Sharp' src='/static/images/avatar/1.jpg' />
+        </ListItemAvatar>
+        <ListItemText
+          primary='Brunch this weekend?'
+          secondary={
+            <React.Fragment>
+              <Typography
+                component='span'
+                variant='body2'
+                className={classes.inline}
+                color='textPrimary'
+              >
+                Ali Connors
+              </Typography>
+              {" — I'll be in your neighborhood doing errands this…"}
+            </React.Fragment>
+          }
+        />
+      </ListItem>
+      <Divider variant='inset' component='li' />
+      <ListItem alignItems='flex-start'>
+        <ListItemAvatar>
+          <Avatar alt='Remy Sharp' src='/static/images/avatar/1.jpg' />
+        </ListItemAvatar>
+        <ListItemText
+          primary='Brunch this weekend?'
+          secondary={
+            <React.Fragment>
+              <Typography
+                component='span'
+                variant='body2'
+                className={classes.inline}
+                color='textPrimary'
+              >
+                Ali Connors
+              </Typography>
+              {" — I'll be in your neighborhood doing errands this…"}
+            </React.Fragment>
+          }
+        />
+      </ListItem>
+      <Divider variant='inset' component='li' />
+      <ListItem alignItems='flex-start'>
+        <ListItemAvatar>
+          <Avatar alt='Remy Sharp' src='/static/images/avatar/1.jpg' />
+        </ListItemAvatar>
+        <ListItemText
+          primary='Brunch this weekend?'
+          secondary={
+            <React.Fragment>
+              <Typography
+                component='span'
+                variant='body2'
+                className={classes.inline}
+                color='textPrimary'
+              >
+                Ali Connors
+              </Typography>
+              {" — I'll be in your neighborhood doing errands this…"}
+            </React.Fragment>
+          }
+        />
+      </ListItem>
+      <Divider variant='inset' component='li' />
+      <ListItem alignItems='flex-start'>
+        <ListItemAvatar>
+          <Avatar alt='Remy Sharp' src='/static/images/avatar/1.jpg' />
+        </ListItemAvatar>
+        <ListItemText
+          primary='Brunch this weekend?'
+          secondary={
+            <React.Fragment>
+              <Typography
+                component='span'
+                variant='body2'
+                className={classes.inline}
+                color='textPrimary'
+              >
+                Ali Connors
+              </Typography>
+              {" — I'll be in your neighborhood doing errands this…"}
+            </React.Fragment>
+          }
+        />
+      </ListItem>
+      <Divider variant='inset' component='li' />
+      <ListItem alignItems='flex-start'>
+        <ListItemAvatar>
+          <Avatar alt='Remy Sharp' src='/static/images/avatar/1.jpg' />
+        </ListItemAvatar>
+        <ListItemText
+          primary='Brunch this weekend?'
+          secondary={
+            <React.Fragment>
+              <Typography
+                component='span'
+                variant='body2'
+                className={classes.inline}
+                color='textPrimary'
+              >
+                Ali Connors
+              </Typography>
+              {" — I'll be in your neighborhood doing errands this…"}
+            </React.Fragment>
+          }
+        />
+      </ListItem>
+      <Divider variant='inset' component='li' />
+      <ListItem alignItems='flex-start'>
+        <ListItemAvatar>
+          <Avatar alt='Remy Sharp' src='/static/images/avatar/1.jpg' />
+        </ListItemAvatar>
+        <ListItemText
+          primary='Brunch this weekend?'
+          secondary={
+            <React.Fragment>
+              <Typography
+                component='span'
+                variant='body2'
+                className={classes.inline}
+                color='textPrimary'
+              >
+                Ali Connors
+              </Typography>
+              {" — I'll be in your neighborhood doing errands this…"}
+            </React.Fragment>
+          }
+        />
+      </ListItem>
+      <Divider variant='inset' component='li' />
+      <ListItem alignItems='flex-start'>
+        <ListItemAvatar>
+          <Avatar alt='Remy Sharp' src='/static/images/avatar/1.jpg' />
+        </ListItemAvatar>
+        <ListItemText
+          primary='Brunch this weekend?'
+          secondary={
+            <React.Fragment>
+              <Typography
+                component='span'
+                variant='body2'
+                className={classes.inline}
+                color='textPrimary'
+              >
+                Ali Connors
+              </Typography>
+              {" — I'll be in your neighborhood doing errands this…"}
+            </React.Fragment>
+          }
+        />
+      </ListItem>
+      <Divider variant='inset' component='li' />
+      <ListItem alignItems='flex-start'>
+        <ListItemAvatar>
+          <Avatar alt='Remy Sharp' src='/static/images/avatar/1.jpg' />
+        </ListItemAvatar>
+        <ListItemText
+          primary='Brunch this weekend?'
+          secondary={
+            <React.Fragment>
+              <Typography
+                component='span'
+                variant='body2'
+                className={classes.inline}
+                color='textPrimary'
+              >
+                Ali Connors
+              </Typography>
+              {" — I'll be in your neighborhood doing errands this…"}
+            </React.Fragment>
+          }
+        />
+      </ListItem>
+      <Divider variant='inset' component='li' />
       <ListItem alignItems='flex-start'>
         <ListItemAvatar>
           <Avatar alt='Remy Sharp' src='/static/images/avatar/1.jpg' />

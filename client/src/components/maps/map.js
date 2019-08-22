@@ -1,6 +1,8 @@
 import React from 'react';
 import {GoogleMap, withScriptjs,withGoogleMap} from 'react-google-maps';
 import mapStyles from './mapStyles'
+//import {connect} from 'react-redux'
+//import { connect } from 'formik';
 
 
 
@@ -8,7 +10,7 @@ import mapStyles from './mapStyles'
 const GMap = ()=>{
 return(
     <div>
-    <GoogleMap defaultZoom={12}  defaultCenter={{lat: 33.969782, lng: -118.401803}} defaultOptions={{styles: mapStyles}}/>
+    <GoogleMap defaultZoom={12}  defaultCenter={{lat:  33.986014, lng:-118.3668194}} defaultOptions={{styles: mapStyles}}/>
     </div>
 )
 
@@ -18,10 +20,10 @@ return(
 
 const WrappedMap = withScriptjs(withGoogleMap(GMap))
 
-export default function Map(){
+const Map = () =>{
 
     return(
-        <div style={{height: '100vh', width: '100vw'}}>
+        <div style={{height: '100vh', width: '100vw', padding: 0, position: "fixed",  marginTop: 60}}>
             <WrappedMap
             googleMapURL= {"https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyAGb4bJ_GV4G3UeUAAJ2cuU06P7cFKftJQ"}
             loadingElement={<div style={{ height: `100%` }} />}
@@ -30,3 +32,9 @@ export default function Map(){
         </div>
     )
 }
+// const mapStateToProps = state =>({
+//     latitude: state.position.latitude,
+//     longitude: state.position.longitude
+// })
+
+export default Map

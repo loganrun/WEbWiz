@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect} from "react";
 import NavBar from "./navBar";
 import Vid from "../../assets/images/twiz (1).mp4";
 import Typography from "@material-ui/core/Typography";
@@ -7,15 +7,41 @@ import VideoCover from "react-video-cover";
 import { Container } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
+import {usePosition} from '../../utils/position';
+import {connect} from 'react-redux'
+import *as actions from '../../actions'
 
-export class landing extends Component {
-  render() {
+const Landing  = ({initialLocation}) => {
+  //const UsePositionDemo = () => {
+    const position = usePosition(true);
+    console.log(position)
+    initialLocation(position)
+  
+  // useEffect(() =>{const fetchLocation = async ()=>{
+  //    if (usePosition()) {
+  //       const location = await navigator.geolocation.getCurrentPosition(showPosition);
+  //   //   console.log(location)
+  //   // } else {
+  //   //   console.log("Geolocation is not supported by this browser.") 
+  //   const {latitude, longitude, error} = usePosition();
+  //   console.log(latitude, longitude)
+  //   }, []);
+
     const videoOptions = {
       src: Vid,
       autoPlay: true,
       loop: true,
       muted: true
     };
+
+    
+    
+
+    // function showPosition(position) {
+      
+    // }
+
+    
     return (
       <div
         style={{
@@ -107,7 +133,10 @@ export class landing extends Component {
         </Container>
       </div>
     );
-  }
+  
 }
 
-export default landing;
+const mapDispatchToProps = {
+  initialLocation: actions.initialLocation
+}
+export default connect(null,mapDispatchToProps)(Landing);
