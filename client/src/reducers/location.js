@@ -1,15 +1,17 @@
-import {INITIAL_LOCATION, INITIAL_LOCATION_ERROR} from '../actions/types'
-const initialState = []
+import { INITIAL_LOCATION, INITIAL_LOCATION_ERROR } from "../actions/types";
+const initialState = {
+  initlocation: "",
+  error: ""
+};
 
-
-export default function(state= initialState, action){
-    const {type, payload} = action;
-    switch(type){
-        case INITIAL_LOCATION:
-            return [...state, payload];
-        case INITIAL_LOCATION_ERROR:
-            return [...state, payload];
-        default:
-            return [...state, payload];
-    }
+export default function(state = initialState, action) {
+  const { type, payload } = action;
+  switch (type) {
+    case INITIAL_LOCATION:
+      return { ...state, initlocation: [...state.initlocation, payload] };
+    case INITIAL_LOCATION_ERROR:
+      return { ...state, error: [...state.error, payload] };
+    default:
+      return state;
+  }
 }
