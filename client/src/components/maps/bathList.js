@@ -6,6 +6,7 @@ import Divider from "@material-ui/core/Divider";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
+import { useSelector } from "react-redux";
 import Typography from "@material-ui/core/Typography";
 
 const listStyles = makeStyles(theme => ({
@@ -25,6 +26,9 @@ const listStyles = makeStyles(theme => ({
 
 export default function AlignItemsList() {
   const classes = listStyles();
+  const places = useSelector(
+    state => state.bathroom.bathrooms.payload.payload.data
+  );
 
   return (
     <List className={classes.root}>
