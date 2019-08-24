@@ -12,12 +12,17 @@ const GMap = () => {
   const marker = useSelector(
     state => state.bathroom.bathrooms.payload.payload.data
   );
-  //console.log(marker);
+
+  const initLocation = useSelector(
+    state => state.location.initlocation.payload
+    
+  )
+  //console.log(initLocation);
   return (
     <div>
       <GoogleMap
-        defaultZoom={12}
-        defaultCenter={{ lat: 33.986014, lng: -118.3668194 }}
+        defaultZoom={15}
+        defaultCenter={{ lat: initLocation.latitude, lng: initLocation.longitude }}
         defaultOptions={{ styles: mapStyles }}
       >
         {marker.map(bath => (

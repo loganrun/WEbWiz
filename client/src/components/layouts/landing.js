@@ -14,9 +14,9 @@ import *as actions from '../../actions'
 const Landing  = ({initialLocation}) => {
   //const UsePositionDemo = () => {
     const position = usePosition(true);
-    console.log(position)
     initialLocation(position)
-  
+    
+    
   // useEffect(() =>{const fetchLocation = async ()=>{
   //    if (usePosition()) {
   //       const location = await navigator.geolocation.getCurrentPosition(showPosition);
@@ -33,21 +33,11 @@ const Landing  = ({initialLocation}) => {
       loop: true,
       muted: true
     };
-
-    
-    
-
-    // function showPosition(position) {
-      
-    // }
-
     
     return (
       <div
         style={{
           overflow: "hidden"
-          //top: "0",
-          //left: "0",
         }}
       >
         <VideoCover
@@ -65,15 +55,7 @@ const Landing  = ({initialLocation}) => {
             //left: "-10vw",
           }}
         >
-          {/* <Typography
-            variant='h2' align='center' 
-            style={{ color: "white", marginLeft: 150, marginTop: 150,zIndex: 1000000 }}
-          >
-            TIRED OF PEEING IN A CUP?
-          </Typography>
-          <Typography variant='h3' style={{ color: "white" }} align='center'>
-            SIGN UP here AND FIND A BATHROOM NEAR YOU
-          </Typography> */}
+          
         </div>
         <NavBar />
         <Container style={{ overflow: "hidden" }}>

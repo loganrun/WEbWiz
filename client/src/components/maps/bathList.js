@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -26,18 +26,22 @@ const listStyles = makeStyles(theme => ({
 
 export default function AlignItemsList() {
   const classes = listStyles();
+
   const places = useSelector(
     state => state.bathroom.bathrooms.payload.payload.data
   );
-
+  
   return (
+    
     <List className={classes.root}>
-      <ListItem alignItems='flex-start'>
+      {places.map(list => (
+         
+      <ListItem alignItems='flex-start' key={list.id}>
         <ListItemAvatar>
           <Avatar alt='Remy Sharp' />
         </ListItemAvatar>
         <ListItemText
-          primary='Brunch this weekend?'
+          primary= {list.name}
           secondary={
             <React.Fragment>
               <Typography
@@ -46,36 +50,17 @@ export default function AlignItemsList() {
                 className={classes.inline}
                 color='textPrimary'
               >
-                Ali Connors
+                {list.street}<br/> {list.city}<br/>{list.sate}
               </Typography>
-              {" — I'll be in your neighborhood doing errands this…"}
+              Directions: {list.directions}
             </React.Fragment>
           }
         />
-      </ListItem>
       <Divider variant='inset' component='li' />
-      <ListItem alignItems='flex-start'>
-        <ListItemAvatar>
-          <Avatar alt='Remy Sharp' />
-        </ListItemAvatar>
-        <ListItemText
-          primary='Brunch this weekend?'
-          secondary={
-            <React.Fragment>
-              <Typography
-                component='span'
-                variant='body2'
-                className={classes.inline}
-                color='textPrimary'
-              >
-                Ali Connors
-              </Typography>
-              {" — I'll be in your neighborhood doing errands this…"}
-            </React.Fragment>
-          }
-        />
       </ListItem>
-      <Divider variant='inset' component='li' />
+      ))
+      
+      }
     </List>
   );
 }

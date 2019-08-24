@@ -12,6 +12,7 @@ import BathList from "../maps/bathList";
 //import {usePosition} from '../../utils/position';
 import *as actions from '../../actions'
 import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import axios from "axios";
 
 
@@ -40,21 +41,22 @@ const gridStyles = makeStyles(theme => ({
 const BathMap = ({loadBathroom}) => {
   const [loading, setLoading] = useState({ loading: true})
 
-  const [data, setData] = useState({ bathrooms: [] });
+  //const [data, setData] = useState({ bathrooms: [] });
 
   
-  // const position = usePosition(true);
-  //   console.log(position)
-  //   initialLocation(position)
-
-  
-  useEffect( () => {
+    const  initLocation =  useSelector(
+      state => state.location.initlocation.payload
+     )
+    
     const params = {
       page: 1,
       per_page: 30,
-      lat: 33.986014,
-      lng: -118.3668194
+      lat: initLocation.latitude,
+      lng: initLocation.longitude
     };
+    
+
+  useEffect( () => {
 
     const restRoom = axios.create({
       baseURL: 'https://www.refugerestrooms.org/api/v1/restrooms',
@@ -67,15 +69,15 @@ const BathMap = ({loadBathroom}) => {
 
     const fetchData = async () => {
     const result = await restRoom.get("/by_location", { params })
-    console.log(result)
-  await setData(result.data);
+  ///await setData(result.data);
   await loadBathroom(result)
+  //console.log(data)
   
   setLoading(false)
       }
     fetchData()}, []);
 
-  const classes = gridStyles();
+  //const classes = gridStyles();
   
   if(loading){
 
