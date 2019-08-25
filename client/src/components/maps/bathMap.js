@@ -4,9 +4,6 @@ import Navbar from "../layouts/mainNavBar";
 import Drawer from "../layouts/drawer";
 import { makeStyles } from "@material-ui/core/styles";
 import Loading from '../layouts/loading'
-//import Typography from '@material-ui/core/Typography';
-//import Paper from '@material-ui/core/Paper';
-//import Divider from '@material-ui/core/Divider';
 import Grid from "@material-ui/core/Grid";
 import BathList from "../maps/bathList";
 //import {usePosition} from '../../utils/position';
@@ -22,7 +19,7 @@ const gridStyles = makeStyles(theme => ({
   container: {
     display: "grid",
     gridTemplateColumns: "repeat(12, 1fr)",
-    gridGap: theme.spacing(0)
+    gridGap: theme.spacing(1)
   },
   paper: {
     padding: theme.spacing(0),
@@ -41,9 +38,6 @@ const gridStyles = makeStyles(theme => ({
 const BathMap = ({loadBathroom}) => {
   const [loading, setLoading] = useState({ loading: true})
 
-  //const [data, setData] = useState({ bathrooms: [] });
-
-  
     const  initLocation =  useSelector(
       state => state.location.initlocation.payload
      )
@@ -69,9 +63,7 @@ const BathMap = ({loadBathroom}) => {
 
     const fetchData = async () => {
     const result = await restRoom.get("/by_location", { params })
-  ///await setData(result.data);
   await loadBathroom(result)
-  //console.log(data)
   
   setLoading(false)
       }
@@ -101,14 +93,9 @@ const BathMap = ({loadBathroom}) => {
   );
 };
 
-const mapStateToProps = state =>({
-  latitude: state.location.latitude,
-  longitude:  state.location.longitude
-})
 
 const mapDispatchToProps = {
-  //initialLocation: actions.initialLocation,
   loadBathroom: actions.loadBathrooms
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(BathMap);
+export default connect(null,mapDispatchToProps)(BathMap);

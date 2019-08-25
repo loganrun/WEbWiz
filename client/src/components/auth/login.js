@@ -5,7 +5,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 //import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import {Formik, Field,Form} from "formik";
 import {TextField, CheckboxWithLabel} from "formik-material-ui";
@@ -42,7 +42,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const SignIn = ({signIn}, props) => {
+const SignIn = ({signIn, isLoggedIn}, props) => {
   const classes = useStyles();
   const validationSchema = yup.object().shape({
     email: yup
@@ -56,6 +56,10 @@ const SignIn = ({signIn}, props) => {
       .required()
   });
 
+  if (isLoggedIn){
+    return <Redirect to='/bathMap'/>
+  }
+
   return (
     <Formik initialValues={{email: "", password: ""}} validationSchema = {validationSchema} 
     onSubmit={async (values, { setSubmitting, resetForm}) => {
@@ -64,7 +68,6 @@ const SignIn = ({signIn}, props) => {
       await signIn(values)
       setSubmitting(false)
       resetForm()
-      props.history.push("/bathMap")
      }catch(err){
        console.log(err.message)
      }
@@ -141,7 +144,9 @@ const SignIn = ({signIn}, props) => {
   );
 }
 
-const mapStateToProps = state =>({})
+const mapStateToProps = ({firebase}) => ({
+  isLoggedIn: firebase.auth.uid,
+});
 
 const mapDispatchToProps = {
   signIn: actions.signIn

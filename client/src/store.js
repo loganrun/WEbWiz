@@ -13,7 +13,8 @@ const initialState = {}
 const composeEnhancers =  process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose : compose
 const rrfconfig ={
     userProfile: 'users',
-    useFirestoreForProfile: true
+    useFirestoreForProfile: true,
+    attachAuthIsReady: true
 }
 
 const store =createStore(

@@ -1,7 +1,7 @@
 import { INITIAL_LOCATION, INITIAL_LOCATION_ERROR } from "../actions/types";
 const initialState = {
   initlocation: [],
-  error: ""
+  error: null
 };
 
 export default function(state = initialState, action) {

@@ -2,7 +2,7 @@ import { LOAD_BATHROOMS, LOAD_BATHROOMS_ERROR } from "../actions/types";
 
 const initialState = {
   bathrooms: {},
-  error: ""
+  error: null
 };
 
 export default function(state = initialState, action) {

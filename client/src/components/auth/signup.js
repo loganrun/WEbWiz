@@ -5,19 +5,16 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { TextField, CheckboxWithLabel } from "formik-material-ui";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import { Formik, Form, Field } from "formik";
 import * as yup from "yup";
-//import * as actions from "../../actions";
-//import { connect } from "react-redux";
-
+import * as actions from "../../actions";
+import { connect } from "react-redux";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import {withRouter} from 'react-router-dom'
-//import { actionTypes } from "react-redux-firebase";
 
 const useStyles = makeStyles(theme => ({
   "@global": {
@@ -44,7 +41,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const SignUp = ( props) => {
+const SignUp = ({signUp, isLoggedIn}) => {
   const classes = useStyles();
   const validationSchema = yup.object().shape({
     email: yup
@@ -68,6 +65,10 @@ const SignUp = ( props) => {
       .required()
   });
 
+  if (isLoggedIn){
+    return <Redirect to='/bathMap'/>
+  }
+
   return (
     <Container component='main' maxWidth='xs'>
       <CssBaseline />
@@ -88,11 +89,9 @@ const SignUp = ( props) => {
           }}
           onSubmit={async (values, { setSubmitting, resetForm }) => {
             console.log(values);
-            //await signUp(values);
+            await signUp(values);
             setSubmitting(false);
             resetForm();
-            props.history.push("/bathMap")
-            
           }}
           validationSchema={validationSchema}
         >
@@ -182,15 +181,13 @@ const SignUp = ( props) => {
   );
 };
 
-// const mapStateToProps = state => ({});
+const mapStateToProps = ({firebase}) => ({
+  isLoggedIn: firebase.auth.uid,
+});
 
-// const mapDispatchToProps = {
-//   signUp: actions.signUp
-// };
+const mapDispatchToProps = {
+  signUp: actions.signUp
+};
 
-export default withRouter(SignUp);
+export default connect(mapStateToProps,mapDispatchToProps)(SignUp)
 
-// connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(

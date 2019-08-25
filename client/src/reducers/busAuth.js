@@ -1,4 +1,4 @@
-import {SIGN_UP_SUCCESS, SIGN_UP_FAIL, SIGN_IN_SUCCESS, SIGN_IN_FAIL} from '../actions/types'
+import {BUSINESS_SIGN_UP_SUCCESS, BUSINESS_SIGN_UP_FAIL,  BUSINESS_SIGN_IN_SUCCESS, BUSINESS_SIGN_IN_FAIL} from '../actions/types'
 
 const initialSate= {
     token: localStorage.getItem('token'),
@@ -11,8 +11,8 @@ export default function(state=initialSate, action) {
     const {type, payload} = action;
 
     switch(type){
-        case SIGN_UP_SUCCESS:
-        case SIGN_IN_SUCCESS:
+        case BUSINESS_SIGN_UP_SUCCESS:
+        case BUSINESS_SIGN_IN_SUCCESS:
             localStorage.setItem('token', payload.token);
             return{
                 ...state,
@@ -20,8 +20,8 @@ export default function(state=initialSate, action) {
                 isAuthenticated: true,
                 loading:    false
             }
-        case SIGN_UP_FAIL:
-        case SIGN_IN_FAIL:
+        case BUSINESS_SIGN_UP_FAIL:
+        case BUSINESS_SIGN_IN_FAIL:
             localStorage.removeItem('token');
             return{
                 ...state,

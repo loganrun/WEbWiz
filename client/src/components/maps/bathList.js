@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -15,7 +15,7 @@ const listStyles = makeStyles(theme => ({
     //maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
     overflow: "scroll",
-    postion: "absolute",
+    position: "absolute",
     marginTop: 70
 
   },

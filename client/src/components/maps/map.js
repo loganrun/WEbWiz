@@ -21,7 +21,7 @@ const GMap = () => {
   return (
     <div>
       <GoogleMap
-        defaultZoom={15}
+        defaultZoom={13}
         defaultCenter={{ lat: initLocation.latitude, lng: initLocation.longitude }}
         defaultOptions={{ styles: mapStyles }}
       >

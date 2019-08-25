@@ -1,4 +1,4 @@
-import React, { useEffect} from "react";
+import React from "react";
 import NavBar from "./navBar";
 import Vid from "../../assets/images/twiz (1).mp4";
 import Typography from "@material-ui/core/Typography";
