@@ -1,36 +1,75 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   GoogleMap,
   withScriptjs,
   withGoogleMap,
-  Marker
+  Marker, InfoWindow, onCenterChange
 } from "react-google-maps";
 import mapStyles from "./mapStyles";
 import { useSelector } from "react-redux";
+import Typography from "@material-ui/core/Typography";
+import mapicon from "../../assets/images/smallicon.png"
+
+
 
 const GMap = () => {
   const marker = useSelector(
     state => state.bathroom.bathrooms.payload.payload.data
   );
 
+  // const newLat = onCenterChange()
+  // console.log(newLat)
+
+  const mapMark = mapicon
+
+ const onBoundsChange = (coord) => {
+    console.log(coord);
+    //console.log(map)
+    
+  }
+  const [selectedBath, setSelectedBath] = useState(null);
+  console.log(selectedBath)
   const initLocation = useSelector(
     state => state.location.initlocation.payload
     
   )
-  //console.log(initLocation);
   return (
     <div>
       <GoogleMap
         defaultZoom={13}
         defaultCenter={{ lat: initLocation.latitude, lng: initLocation.longitude }}
         defaultOptions={{ styles: mapStyles }}
+        onDragEnd={(t, map, coord) => onBoundsChange(coord)}
       >
         {marker.map(bath => (
           <Marker
             key={bath.id}
             position={{ lat: bath.latitude, lng: bath.longitude }}
+            icon= {mapMark}
+            onClick={()=>{
+              setSelectedBath(bath)
+              
+            }}
           />
         ))}
+
+        {selectedBath && (
+          <InfoWindow
+          onCloseClick= {()=>{
+            setSelectedBath(null);
+          }}
+          position={{
+            lat:  selectedBath.latitude,
+            lng:  selectedBath.longitude
+          }}>
+            <div>
+            <Typography variant="h6">{selectedBath.name}</Typography>
+            <Typography>{selectedBath.street}</Typography>
+            <Typography>{selectedBath.city}</Typography>
+            </div>
+          </InfoWindow>
+
+        )}
       </GoogleMap>
     </div>
   );

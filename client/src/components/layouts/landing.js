@@ -87,7 +87,7 @@ const Landing  = ({initialLocation}) => {
                   HERE
                 </Button>
               </Link>
-              and WHIZZ will show you the closest place too find relief!
+              and WHIZZ will show you the closest place to find relief!
             </Typography>
             <Typography
               variant='h4'
