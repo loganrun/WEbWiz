@@ -8,11 +8,12 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import { useSelector } from "react-redux";
 import Typography from "@material-ui/core/Typography";
+import bathicon from "../../assets/images/bathicon.jpg"
 
 const listStyles = makeStyles(theme => ({
   root: {
     width: "100%",
-    //maxWidth: 360,
+    maxWidth: 500,
     backgroundColor: theme.palette.background.paper,
     overflow: "scroll",
     position: "absolute",
@@ -21,8 +22,15 @@ const listStyles = makeStyles(theme => ({
   },
   inline: {
     display: "inline"
+  },
+  bigAvatar: {
+    margin: 10,
+    width: 60,
+    height: 60,
   }
 }));
+
+const bath = bathicon
 
 export default function AlignItemsList() {
   const classes = listStyles();
@@ -38,7 +46,7 @@ export default function AlignItemsList() {
          
       <ListItem alignItems='flex-start' key={list.id}>
         <ListItemAvatar>
-          <Avatar alt='Remy Sharp' />
+          <Avatar src= {bath} alt='Remy Sharp' className={classes.bigAvatar} />
         </ListItemAvatar>
         <ListItemText
           primary= {list.name}
@@ -52,7 +60,10 @@ export default function AlignItemsList() {
               >
                 {list.street}<br/> {list.city}<br/>{list.sate}
               </Typography>
+              <Typography variant="body1">
               Directions: {list.directions}
+              </Typography>
+             
             </React.Fragment>
           }
         />
