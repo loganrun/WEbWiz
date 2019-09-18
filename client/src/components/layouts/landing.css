@@ -3,3 +3,19 @@ body {
   margin: 0;
   padding: 0;
 }
+
+
+@media(min-width: 600px) {
+  .landing-title {
+    font-size: 20px;
+    margin-top: 15px
+  }
+  .slogan{
+    font-size: 25px;
+    margin-top: 90px;
+  }
+  .invite{
+    font-size: 25px;
+    margin-top: 10px;
+  }
+}

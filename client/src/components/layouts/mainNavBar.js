@@ -177,7 +177,7 @@ export default function PrimarySearchAppBar() {
           <Typography className={classes.title} variant='h6' noWrap>
             WHIZZ
           </Typography>
-          <div className={classes.search}>
+          {/* <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
@@ -189,10 +189,10 @@ export default function PrimarySearchAppBar() {
               }}
               inputProps={{ "aria-label": "search" }}
             />
-          </div>
+          </div> */}
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label='show 4 new mails' color='inherit'>
+            {/* <IconButton aria-label='show 4 new mails' color='inherit'>
               <Badge badgeContent={4} color='secondary'>
                 <MailIcon />
               </Badge>
@@ -211,10 +211,10 @@ export default function PrimarySearchAppBar() {
               color='inherit'
             >
               <AccountCircle />
-            </IconButton>
+            </IconButton> */}
           </div>
           <div className={classes.sectionMobile}>
-            <IconButton
+            {/* <IconButton
               aria-label='show more'
               aria-controls={mobileMenuId}
               aria-haspopup='true'
@@ -222,7 +222,7 @@ export default function PrimarySearchAppBar() {
               color='inherit'
             >
               <MoreIcon />
-            </IconButton>
+            </IconButton> */}
           </div>
         </Toolbar>
       </AppBar>

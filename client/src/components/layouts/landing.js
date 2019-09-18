@@ -61,7 +61,8 @@ const Landing  = ({initialLocation}) => {
         <Container style={{ overflow: "hidden" }}>
           <div style={{}}>
             <Typography
-              variant='h2'
+              //variant='h2'
+              className="landing-title"
               align='center'
               paragraph
               style={{
@@ -95,7 +96,7 @@ const Landing  = ({initialLocation}) => {
               align='center'
             >
               Add your business to our growing community by clicking
-              <Link to='signup' variant='body2' style={{ color: "white" }}>
+              <Link to='signup' variant='body2' className="invite" style={{ color: "white" }}>
                 <Button
                   variant='outlined'
                   size='small'
