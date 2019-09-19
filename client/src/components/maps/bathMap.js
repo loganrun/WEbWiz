@@ -1,19 +1,16 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import Map from "./map";
 import Navbar from "../layouts/mainNavBar";
 import Drawer from "../layouts/drawer";
 import { makeStyles } from "@material-ui/core/styles";
-import Loading from '../layouts/loading'
+import Loading from "../layouts/loading";
 import Grid from "@material-ui/core/Grid";
 import BathList from "../maps/bathList";
 //import {usePosition} from '../../utils/position';
-import *as actions from '../../actions'
+import * as actions from "../../actions";
 import { connect } from "react-redux";
 import { useSelector } from "react-redux";
 import axios from "axios";
-
-
-
 
 const gridStyles = makeStyles(theme => ({
   container: {
@@ -33,69 +30,67 @@ const gridStyles = makeStyles(theme => ({
   }
 }));
 
-    //initialLocation(position)
+//initialLocation(position)
 
-const BathMap = ({loadBathroom}) => {
-  const [loading, setLoading] = useState({ loading: true})
+const BathMap = ({ loadBathroom }) => {
+  const [loading, setLoading] = useState({ loading: true });
 
-    const  initLocation =  useSelector(
-      state => state.location.initlocation.payload
-     )
-    
-    const params = {
-      page: 1,
-      per_page: 30,
-      lat: initLocation.latitude,
-      lng: initLocation.longitude
-    };
-    
+  const initLocation = useSelector(
+    state => state.location.initlocation.payload
+  );
 
-  useEffect( () => {
+  const params = {
+    page: 1,
+    per_page: 30,
+    lat: initLocation.latitude,
+    lng: initLocation.longitude
+  };
 
+  useEffect(() => {
     const restRoom = axios.create({
-      baseURL: 'https://www.refugerestrooms.org/api/v1/restrooms',
+      baseURL: "https://www.refugerestrooms.org/api/v1/restrooms",
       timeout: 40000,
       headers: {
-        "Accept": "application/json",
+        Accept: "application/json",
         "Content-Type": "application/json"
-      } 
+      }
     });
 
     const fetchData = async () => {
-    const result = await restRoom.get("/by_location", { params })
-  await loadBathroom(result)
-  
-  setLoading(false)
-      }
-    fetchData()}, []);
+      const result = await restRoom.get("/by_location", { params });
+      await loadBathroom(result);
+
+      setLoading(false);
+    };
+    fetchData();
+  }, []);
 
   //const classes = gridStyles();
-  
-  if(loading){
 
-    return <Loading />
-
+  if (loading) {
+    return <Loading />;
   }
   return (
-    
     <div>
       <Navbar />
       <Drawer />
       <Grid container spacing={1}>
-        <Grid item xs={3}>
+        <Grid item xs={4}>
           <BathList />
         </Grid>
-        <Grid item xs={9}>
-          <Map/>
+        <Grid item xs={8}>
+          <Map />
         </Grid>
       </Grid>
     </div>
   );
 };
 
-
 const mapDispatchToProps = {
   loadBathroom: actions.loadBathrooms
-}
+};
 
-export default connect(null,mapDispatchToProps)(BathMap);
+export default connect(
+  null,
+  mapDispatchToProps
+)(BathMap);

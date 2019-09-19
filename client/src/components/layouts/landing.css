@@ -3,38 +3,3 @@ body {
   margin: 0;
   padding: 0;
 }
-
-
-.landing-title{
-  align-content: center;
-  color: white;
-  position: relative;
-  marginTop: '200px';
-  margin-bottom: '100px';
-  font-size: '85px' */
-}
-
-/* align='center'
-              paragraph
-              style={{
-                color: "white",
-                position: "relative",
-                marginTop: 200,
-                marginBottom: 100
-              }} */
-
-
-/* @media screen and (min-width: 600px) {
-  .landing-title {
-    font-size: 85px;
-    margin-top: 15px
-  }
-  .slogan{
-    font-size: 25px;
-    margin-top: 90px;
-  }
-  .invite{
-    font-size: 25px;
-    margin-top: 10px;
-  }
-} */
