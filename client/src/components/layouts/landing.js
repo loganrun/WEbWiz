@@ -63,14 +63,14 @@ const Landing  = ({initialLocation}) => {
             <Typography
               //variant='h2'
               className="landing-title"
-              align='center'
-              paragraph
-              style={{
-                color: "white",
-                position: "relative",
-                marginTop: 200,
-                marginBottom: 100
-              }}
+              // align='center'
+              // paragraph
+              // style={{
+              //   color: "white",
+              //   position: "relative",
+              //   marginTop: 200,
+              //   marginBottom: 100
+              // }}
             >
               Are you visiting a new city? A rideshare driver looking for a
               place to "go"? Click
