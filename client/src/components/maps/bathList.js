@@ -33,11 +33,13 @@ const listStyles = makeStyles(theme => ({
       margin: 0,
       width: 30,
       height: 30,
-      padding: 0
+      padding: 0,
+      display: 'none'
     },
     listAvatar: {
       padding: 0,
-      margin: 0
+      margin: 0, 
+      display: "none"
     },
     inline: {
       fontSize: 12

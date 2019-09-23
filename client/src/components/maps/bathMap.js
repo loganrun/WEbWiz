@@ -57,6 +57,7 @@ const BathMap = ({ loadBathroom }) => {
     });
 
     const fetchData = async () => {
+      
       const result = await restRoom.get("/by_location", { params });
       await loadBathroom(result);
 
@@ -75,10 +76,10 @@ const BathMap = ({ loadBathroom }) => {
       <Navbar />
       <Drawer />
       <Grid container spacing={1}>
-        <Grid item xs={4}>
+        <Grid item xs={3}>
           <BathList />
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={9}>
           <Map />
         </Grid>
       </Grid>

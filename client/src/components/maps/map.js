@@ -17,33 +17,11 @@ const GMap = () => {
     state => state.bathroom.bathrooms.payload.payload.data
   );
 
-  // const newLat = onCenterChange()
-  // console.log(newLat)
+  
 
   const mapMark = mapicon
   let map = null;
 
-//   const bounds = new window.google.maps.LatLngBounds();
-//   console.log(bounds)
-
-//  const onBoundsChange = (coord) => {
-//     console.log(coord);
-//     //console.log(map)
-    
-//   }
-
-//   const onDragEnd = (coord) => {
-//     const { latLng } = coord;
-//     const lat = latLng.lat();
-//     const lng = latLng.lng();
-//     console.log(lat)
-//     console.log(lng)
-//   }
-
-//   const centerMoved = (event) =>  {
-//     console.log(event);
-//     //console.log(map)
-//   }
 
   const [selectedBath, setSelectedBath] = useState(null);
   console.log(selectedBath)
@@ -58,12 +36,9 @@ const GMap = () => {
         defaultCenter={{ lat: initLocation.latitude, lng: initLocation.longitude }}
         defaultOptions={{ styles: mapStyles }}
         ref={(ref)=>{
-          //console.log(ref)
           map = ref
         }}
-        // ref={map => map && map.fitBounds(bounds)}
-        // onDragEnd={(t, map, coord) => onDragEnd(coord)}
-        // onDragEnd={(t, map, coord) => onBoundsChange(coord)}
+        
         onDragEnd={()=>{
           //console.log(map.getBounds());
           console.log(map.getCenter().lat());
