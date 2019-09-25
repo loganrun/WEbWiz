@@ -12,12 +12,15 @@ import bathicon from "../../assets/images/bathicon.jpg";
 
 const listStyles = makeStyles(theme => ({
   root: {
-    width: "100%",
+    //width: "100%",
     maxWidth: 500,
     backgroundColor: theme.palette.background.paper,
     overflow: "scroll",
-    position: "absolute",
-    marginTop: 70
+    position: "relative",
+    marginTop: 70,
+    margin: 0,
+    padding:0
+    //zIndex: 10
   },
   inline: {
     display: "inline"
@@ -62,7 +65,7 @@ export default function AlignItemsList() {
   return (
     <List className={classes.root}>
       {places.map(list => (
-        <ListItem alignItems='flex-start' key={list.id}>
+        <ListItem alignItems='flex-start' key={list.id} className={classes.list}>
           <ListItemAvatar className={classes.listAvatar}>
             <Avatar src={bath} alt='Remy Sharp' className={classes.bigAvatar} />
           </ListItemAvatar>

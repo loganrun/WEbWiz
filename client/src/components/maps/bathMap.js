@@ -4,19 +4,20 @@ import Navbar from "../layouts/mainNavBar";
 import Drawer from "../layouts/drawer";
 import { makeStyles } from "@material-ui/core/styles";
 import Loading from "../layouts/loading";
-import Grid from "@material-ui/core/Grid";
+//import Grid from "@material-ui/core/Grid";
 import BathList from "../maps/bathList";
 //import {usePosition} from '../../utils/position';
 import * as actions from "../../actions";
 import { connect } from "react-redux";
 import { useSelector } from "react-redux";
 import axios from "axios";
+//import { mergeClasses } from "@material-ui/styles";
 
 const gridStyles = makeStyles(theme => ({
   container: {
     display: "grid",
-    gridTemplateColumns: "repeat(12, 1fr)",
-    gridGap: theme.spacing(1)
+    gridTemplateColumns: "20% 80%",
+    //gridGap: 5
   },
   paper: {
     padding: theme.spacing(0),
@@ -66,7 +67,7 @@ const BathMap = ({ loadBathroom }) => {
     fetchData();
   }, []);
 
-  //const classes = gridStyles();
+  const classes = gridStyles();
 
   if (loading) {
     return <Loading />;
@@ -75,14 +76,16 @@ const BathMap = ({ loadBathroom }) => {
     <div>
       <Navbar />
       <Drawer />
-      <Grid container spacing={1}>
-        <Grid item xs={3}>
+      <div className= {classes.container}>
+          <div>
           <BathList />
-        </Grid>
-        <Grid item xs={9}>
+          </div>
+          <div>
           <Map />
-        </Grid>
-      </Grid>
+          </div>
+         
+          
+      </div>
     </div>
   );
 };
