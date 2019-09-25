@@ -11,6 +11,7 @@ import * as actions from "../../actions";
 import { connect } from "react-redux";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { mergeClasses } from "@material-ui/styles";
 
 const gridStyles = makeStyles(theme => ({
   container: {
@@ -57,7 +58,6 @@ const BathMap = ({ loadBathroom }) => {
     });
 
     const fetchData = async () => {
-      
       const result = await restRoom.get("/by_location", { params });
       await loadBathroom(result);
 
@@ -66,7 +66,7 @@ const BathMap = ({ loadBathroom }) => {
     fetchData();
   }, []);
 
-  //const classes = gridStyles();
+  const classes = gridStyles();
 
   if (loading) {
     return <Loading />;
@@ -75,7 +75,7 @@ const BathMap = ({ loadBathroom }) => {
     <div>
       <Navbar />
       <Drawer />
-      <Grid container spacing={1}>
+      <Grid container className={classes.container} spacing={1}>
         <Grid item xs={3}>
           <BathList />
         </Grid>
