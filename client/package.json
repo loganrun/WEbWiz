@@ -9,6 +9,7 @@
     "firebase": "^6.3.5",
     "formik": "^1.5.8",
     "formik-material-ui": "0.0.20",
+    "immer": "^4.0.0",
     "moment": "^2.24.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
@@ -23,6 +24,7 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-firestore": "^0.8.0",
     "redux-thunk": "^2.3.0",
+    "use-immer": "^0.3.4",
     "uuid": "^3.3.2",
     "yup": "^0.27.0"
   },

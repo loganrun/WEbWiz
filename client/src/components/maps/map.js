@@ -12,11 +12,17 @@ import Typography from "@material-ui/core/Typography";
 import mapicon from "../../assets/images/bathicon2.png";
 import * as actions from "../../actions";
 import { connect } from "react-redux";
+import { useImmer } from "use-immer";
 
 const GMap = ({ searchLocation }) => {
   const marker = useSelector(
     state => state.bathroom.bathrooms.payload.payload.data
   );
+
+  // const initialState = useImmer{
+  //   longitude:  '',
+  //   latitude: '',
+  // }
 
   const mapMark = mapicon;
   let map = null;
@@ -27,13 +33,42 @@ const GMap = ({ searchLocation }) => {
     state => state.location.initlocation.payload
   );
 
-  // const [newLocation, setNewLocation] = useState({latitude: newLat,
-  //                                                  longitude: newLng})
+   const [newLocation, setNewLocation] = useImmer({longitude: '', latitude: ''})
 
-  // const updateLocation = map => {
-  //   const newPosition = console.log(map.getCenter().lat());
-  //   console.log(map.getCenter().lng());
-  // };
+  //  const updateLocation = (map) => {
+  //   setNewLocation( longitude =>{...longitude, longitude:  map.getCenter().lng()}) 
+  //   setNewLocation({...latitude, latitude: map.getCenter().lat()});
+  //    console.log(newLocation);
+  //  };
+
+   const updateLatitude = (newLat) =>{
+     setNewLocation(draft => {
+       draft.latitude = newLat
+     })
+   }
+
+   const updateLongitude = (newLng) =>{
+    setNewLocation(draft => {
+      draft.longitude = newLng
+    })
+  }
+
+  // const newSearch = ({searchLocation}, newLng, newLat)=>{
+  //   const updateLatitude = (newLat) =>{
+  //     setNewLocation(draft => {
+  //       draft.latitude = newLat
+  //     })
+  //   }
+ 
+  //   const updateLongitude = (newLng) =>{
+  //    setNewLocation(draft => {
+  //      draft.longitude = newLng
+  //    })
+  //  }
+
+  // }
+
+  console.log(newLocation)
   return (
     <div>
       <GoogleMap
@@ -48,9 +83,11 @@ const GMap = ({ searchLocation }) => {
         }}
         onDragEnd={() => {
           //console.log(map.getBounds());
-          //updateLocation(map);
-          //console.log(map.getCenter().lat());
-          //console.log(map.getCenter().lng());
+         
+          const newLat = map.getCenter().lat();
+          const newLng = map.getCenter().lng();
+          updateLongitude(newLng);
+          updateLatitude(newLat)
         }}
       >
         {marker.map(bath => (
