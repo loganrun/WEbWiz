@@ -30,10 +30,10 @@ const GMap = ({ searchLocation }) => {
   // const [newLocation, setNewLocation] = useState({latitude: newLat,
   //                                                  longitude: newLng})
 
-  const updateLocation = map => {
-    const newPosition = console.log(map.getCenter().lat());
-    console.log(map.getCenter().lng());
-  };
+  // const updateLocation = map => {
+  //   const newPosition = console.log(map.getCenter().lat());
+  //   console.log(map.getCenter().lng());
+  // };
   return (
     <div>
       <GoogleMap
@@ -48,7 +48,7 @@ const GMap = ({ searchLocation }) => {
         }}
         onDragEnd={() => {
           //console.log(map.getBounds());
-          updateLocation(map);
+          //updateLocation(map);
           //console.log(map.getCenter().lat());
           //console.log(map.getCenter().lng());
         }}
