@@ -39,13 +39,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Landing = ({ initialLocation }) => {
+const Landing = ({ initialLocation, searchLocation }) => {
   //const UsePositionDemo = () => {
 
   const classes = useStyles();
   const position = usePosition(true);
   initialLocation(position);
-
+  searchLocation(position);
+  //console.log(position);
   // useEffect(() =>{const fetchLocation = async ()=>{
   //    if (usePosition()) {
   //       const location = await navigator.geolocation.getCurrentPosition(showPosition);
@@ -151,7 +152,8 @@ const Landing = ({ initialLocation }) => {
 };
 
 const mapDispatchToProps = {
-  initialLocation: actions.initialLocation
+  initialLocation: actions.initialLocation,
+  searchLocation: actions.searchLocation
 };
 export default connect(
   null,

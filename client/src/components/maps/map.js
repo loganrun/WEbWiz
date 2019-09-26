@@ -1,78 +1,85 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import {
   GoogleMap,
   withScriptjs,
   withGoogleMap,
-  Marker, InfoWindow
+  Marker,
+  InfoWindow
 } from "react-google-maps";
 import mapStyles from "./mapStyles";
 import { useSelector } from "react-redux";
 import Typography from "@material-ui/core/Typography";
-import mapicon from "../../assets/images/bathicon2.png"
+import mapicon from "../../assets/images/bathicon2.png";
+import * as actions from "../../actions";
+import { connect } from "react-redux";
 
-
-
-const GMap = () => {
+const GMap = ({ searchLocation }) => {
   const marker = useSelector(
     state => state.bathroom.bathrooms.payload.payload.data
   );
 
-  
-
-  const mapMark = mapicon
+  const mapMark = mapicon;
   let map = null;
 
-
   const [selectedBath, setSelectedBath] = useState(null);
-  console.log(selectedBath)
+  //console.log(selectedBath)
   const initLocation = useSelector(
     state => state.location.initlocation.payload
-    
-  )
+  );
+
+  // const [newLocation, setNewLocation] = useState({latitude: newLat,
+  //                                                  longitude: newLng})
+
+  const updateLocation = map => {
+    const newPosition = console.log(map.getCenter().lat());
+    console.log(map.getCenter().lng());
+  };
   return (
     <div>
       <GoogleMap
         defaultZoom={13}
-        defaultCenter={{ lat: initLocation.latitude, lng: initLocation.longitude }}
-        defaultOptions={{ styles: mapStyles }}
-        ref={(ref)=>{
-          map = ref
+        defaultCenter={{
+          lat: initLocation.latitude,
+          lng: initLocation.longitude
         }}
-        
-        onDragEnd={()=>{
+        defaultOptions={{ styles: mapStyles }}
+        ref={ref => {
+          map = ref;
+        }}
+        onDragEnd={() => {
           //console.log(map.getBounds());
-          console.log(map.getCenter().lat());
-          console.log(map.getCenter().lng());
+          updateLocation(map);
+          //console.log(map.getCenter().lat());
+          //console.log(map.getCenter().lng());
         }}
       >
         {marker.map(bath => (
           <Marker
             key={bath.id}
             position={{ lat: bath.latitude, lng: bath.longitude }}
-            icon= {mapMark}
-            onClick={()=>{
-              setSelectedBath(bath)
-              
+            icon={mapMark}
+            onClick={() => {
+              setSelectedBath(bath);
             }}
           />
         ))}
 
         {selectedBath && (
           <InfoWindow
-          onCloseClick= {()=>{
-            setSelectedBath(null);
-          }}
-          position={{
-            lat:  selectedBath.latitude,
-            lng:  selectedBath.longitude
-          }}>
+            onCloseClick={() => {
+              setSelectedBath(null);
+            }}
+            position={{
+              lat: selectedBath.latitude,
+              lng: selectedBath.longitude
+            }}
+          >
             <div>
-            <Typography variant="h6">{selectedBath.name}</Typography>
-            <Typography>{selectedBath.street}</Typography>
-            <Typography>{selectedBath.city}</Typography>
+              <Typography variant='h6'>{selectedBath.name}</Typography>
+              <Typography>{selectedBath.street}</Typography>
+              <Typography>{selectedBath.city}</Typography>
             </div>
           </InfoWindow>
-
         )}
       </GoogleMap>
     </div>
@@ -93,15 +100,20 @@ const Map = () => {
       }}
     >
       <WrappedMap
-        googleMapURL={
-          `https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${process.env.REACT_APP_GOOGLE_KEY}`
-        }
-        loadingElement={<div style={{ height: '100%' }} />}
-        containerElement={<div style={{ height: '100%' }} />}
-        mapElement={<div style={{ height: '100%' }} />}
+        googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${process.env.REACT_APP_GOOGLE_KEY}`}
+        loadingElement={<div style={{ height: "100%" }} />}
+        containerElement={<div style={{ height: "100%" }} />}
+        mapElement={<div style={{ height: "100%" }} />}
       />
     </div>
   );
 };
 
-export default Map;
+const mapDispatchToProps = {
+  searchLocation: actions.searchLocation
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Map);
