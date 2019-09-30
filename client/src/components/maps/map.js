@@ -33,25 +33,28 @@ const GMap = ({ searchLocation }) => {
     state => state.location.initlocation.payload
   );
 
-   const [newLocation, setNewLocation] = useImmer({longitude: '', latitude: ''})
+  const [newLocation, setNewLocation] = useImmer({
+    longitude: "",
+    latitude: ""
+  });
 
   //  const updateLocation = (map) => {
-  //   setNewLocation( longitude =>{...longitude, longitude:  map.getCenter().lng()}) 
+  //   setNewLocation( longitude =>{...longitude, longitude:  map.getCenter().lng()})
   //   setNewLocation({...latitude, latitude: map.getCenter().lat()});
   //    console.log(newLocation);
   //  };
 
-   const updateLatitude = (newLat) =>{
-     setNewLocation(draft => {
-       draft.latitude = newLat
-     })
-   }
-
-   const updateLongitude = (newLng) =>{
+  const updateLatitude = newLat => {
     setNewLocation(draft => {
-      draft.longitude = newLng
-    })
-  }
+      draft.latitude = newLat;
+    });
+  };
+
+  const updateLongitude = newLng => {
+    setNewLocation(draft => {
+      draft.longitude = newLng;
+    });
+  };
 
   // const newSearch = ({searchLocation}, newLng, newLat)=>{
   //   const updateLatitude = (newLat) =>{
@@ -59,7 +62,7 @@ const GMap = ({ searchLocation }) => {
   //       draft.latitude = newLat
   //     })
   //   }
- 
+
   //   const updateLongitude = (newLng) =>{
   //    setNewLocation(draft => {
   //      draft.longitude = newLng
@@ -68,7 +71,7 @@ const GMap = ({ searchLocation }) => {
 
   // }
 
-  console.log(newLocation)
+  //console.log(newLocation)
   return (
     <div>
       <GoogleMap
@@ -83,11 +86,11 @@ const GMap = ({ searchLocation }) => {
         }}
         onDragEnd={() => {
           //console.log(map.getBounds());
-         
+
           const newLat = map.getCenter().lat();
           const newLng = map.getCenter().lng();
           updateLongitude(newLng);
-          updateLatitude(newLat)
+          updateLatitude(newLat);
         }}
       >
         {marker.map(bath => (
