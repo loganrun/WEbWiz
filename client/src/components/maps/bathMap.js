@@ -46,11 +46,14 @@ const BathMap = ({ loadBathroom }) => {
     state => state.location.initlocation.payload
   );
 
+  const loc = localStorage.getItem("initialPosition");
+  const initLoc = JSON.parse(loc);
+
   const params = {
     page: 1,
-    per_page: 30,
-    lat: initLocation.latitude,
-    lng: initLocation.longitude
+    per_page: 50,
+    lat: initLoc.latitude,
+    lng: initLoc.longitude
   };
 
   useEffect(() => {

@@ -46,7 +46,8 @@ const Landing = ({ initialLocation, searchLocation }) => {
   const position = usePosition(true);
   initialLocation(position);
   searchLocation(position);
-  //console.log(position);
+  console.log(position);
+
   // useEffect(() =>{const fetchLocation = async ()=>{
   //    if (usePosition()) {
   //       const location = await navigator.geolocation.getCurrentPosition(showPosition);
@@ -56,6 +57,10 @@ const Landing = ({ initialLocation, searchLocation }) => {
   //   const {latitude, longitude, error} = usePosition();
   //   console.log(latitude, longitude)
   //   }, []);
+
+  React.useEffect(() => {
+    localStorage.setItem("initialPosition", JSON.stringify(position));
+  });
 
   const videoOptions = {
     src: Vid,

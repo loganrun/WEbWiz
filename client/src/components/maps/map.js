@@ -18,16 +18,18 @@ const GMap = ({ searchLocation }) => {
   const marker = useSelector(
     state => state.bathroom.bathrooms.payload.payload.data
   );
-
-  // const initialState = useImmer{
-  //   longitude:  '',
-  //   latitude: '',
-  // }
+  const [intLocation, setIntLocation] = useImmer({
+    longitude: "",
+    latitude: ""
+  });
+  const loc = localStorage.getItem("initialPosition");
+  const initLoc = JSON.parse(loc);
 
   const mapMark = mapicon;
   let map = null;
 
   const [selectedBath, setSelectedBath] = useState(null);
+
   //console.log(selectedBath)
   const initLocation = useSelector(
     state => state.location.initlocation.payload
@@ -54,15 +56,12 @@ const GMap = ({ searchLocation }) => {
     setNewLocation(draft => {
       draft.longitude = newLng;
     });
+    newSearch();
   };
 
-  // const newSearch = ({searchLocation}, newLng, newLat)=>{
-  //   const updateLatitude = (newLat) =>{
-  //     setNewLocation(draft => {
-  //       draft.latitude = newLat
-  //     })
-  //   }
-
+  const newSearch = () => {
+    searchLocation(newLocation);
+  };
   //   const updateLongitude = (newLng) =>{
   //    setNewLocation(draft => {
   //      draft.longitude = newLng
@@ -71,14 +70,14 @@ const GMap = ({ searchLocation }) => {
 
   // }
 
-  //console.log(newLocation)
+  console.log(newLocation);
   return (
     <div>
       <GoogleMap
         defaultZoom={13}
         defaultCenter={{
-          lat: initLocation.latitude,
-          lng: initLocation.longitude
+          lat: initLoc.latitude,
+          lng: initLoc.longitude
         }}
         defaultOptions={{ styles: mapStyles }}
         ref={ref => {
