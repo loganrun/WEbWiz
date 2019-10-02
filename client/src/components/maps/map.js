@@ -162,6 +162,9 @@ const GMap = ({ searchLocation }) => {
               <Typography variant='h6'>{selectedBath.name}</Typography>
               <Typography>{selectedBath.street}</Typography>
               <Typography>{selectedBath.city}</Typography>
+              <Typography variant='subtitle2'>
+                {selectedBath.directions}
+              </Typography>
               <a target='_blank' href={navLink}>
                 <Button
                   variant='extended'
