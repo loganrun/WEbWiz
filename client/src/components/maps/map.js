@@ -15,8 +15,7 @@ import { connect } from "react-redux";
 import { useImmer } from "use-immer";
 import DirectionsOutlinedIcon from "@material-ui/icons/DirectionsOutlined";
 import Button from "@material-ui/core/Button";
-import { Link } from "react-router-dom";
-import axios from "axios";
+import queryString from "query-string";
 
 const GMap = ({ searchLocation }) => {
   const marker = useSelector(
@@ -33,6 +32,7 @@ const GMap = ({ searchLocation }) => {
   let map = null;
 
   const [selectedBath, setSelectedBath] = useState(null);
+  const [navLink, setNavLink] = useState("");
 
   //console.log(selectedBath)
   const initLocation = useSelector(
@@ -63,6 +63,35 @@ const GMap = ({ searchLocation }) => {
     //newSearch();
   };
 
+  const prepLink = bath => {
+    const fir = queryString.stringify(
+      { destination: [bath.latitude, bath.longitude] }, //[34.0422533, -118.2599014]
+      { arrayFormat: "comma" }
+    );
+
+    const dir = queryString.stringify(
+      {
+        origin: [initLoc.latitude, initLoc.longitude]
+      },
+      { arrayFormat: "comma" }
+    );
+
+    const mode = queryString.stringify(
+      { travelmode: "driving", dir_action: "navigate" },
+      { sort: false }
+    );
+
+    const preurl =
+      "https://www.google.com/maps/dir/?api=1" +
+      "&" +
+      `${dir}` +
+      "&" +
+      `${fir}` +
+      "&" +
+      `${mode}`;
+
+    setNavLink(preurl);
+  };
   // const getDirections = () => {
   //   const directions = axios.create({
   //     baseURL: "https://www.google.com/maps/dir/?api=1&",
@@ -85,7 +114,6 @@ const GMap = ({ searchLocation }) => {
 
   // }
 
-  console.log(newLocation);
   return (
     <div>
       <GoogleMap
@@ -114,6 +142,8 @@ const GMap = ({ searchLocation }) => {
             icon={mapMark}
             onClick={() => {
               setSelectedBath(bath);
+              console.log(bath);
+              prepLink(bath);
             }}
           />
         ))}
@@ -132,7 +162,7 @@ const GMap = ({ searchLocation }) => {
               <Typography variant='h6'>{selectedBath.name}</Typography>
               <Typography>{selectedBath.street}</Typography>
               <Typography>{selectedBath.city}</Typography>
-              <a href='https://www.google.com/maps/dir/?api=1&origin=34.0525404,-118.2643452&destination=34.0422533,-118.2599014&travelmode=driving&dir_action=navigate'>
+              <a target='_blank' href={navLink}>
                 <Button
                   variant='extended'
                   size='small'
