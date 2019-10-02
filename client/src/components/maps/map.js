@@ -142,7 +142,6 @@ const GMap = ({ searchLocation }) => {
             icon={mapMark}
             onClick={() => {
               setSelectedBath(bath);
-              console.log(bath);
               prepLink(bath);
             }}
           />
