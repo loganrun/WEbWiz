@@ -13,6 +13,10 @@ import mapicon from "../../assets/images/bathicon2.png";
 import * as actions from "../../actions";
 import { connect } from "react-redux";
 import { useImmer } from "use-immer";
+import DirectionsOutlinedIcon from "@material-ui/icons/DirectionsOutlined";
+import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 const GMap = ({ searchLocation }) => {
   const marker = useSelector(
@@ -56,12 +60,23 @@ const GMap = ({ searchLocation }) => {
     setNewLocation(draft => {
       draft.longitude = newLng;
     });
-    newSearch();
+    //newSearch();
   };
 
-  const newSearch = () => {
-    searchLocation(newLocation);
-  };
+  // const getDirections = () => {
+  //   const directions = axios.create({
+  //     baseURL: "https://www.google.com/maps/dir/?api=1&",
+  //     timeout: 40000,
+  //     headers: {
+  //       Accept: "application/json",
+  //       "Content-Type": "application/json"
+  //     }
+  //   });
+  // };
+
+  // const newSearch = () => {
+  //   searchLocation(newLocation);
+  // };
   //   const updateLongitude = (newLng) =>{
   //    setNewLocation(draft => {
   //      draft.longitude = newLng
@@ -117,6 +132,21 @@ const GMap = ({ searchLocation }) => {
               <Typography variant='h6'>{selectedBath.name}</Typography>
               <Typography>{selectedBath.street}</Typography>
               <Typography>{selectedBath.city}</Typography>
+              <a href='https://www.google.com/maps/dir/?api=1&origin=34.0525404,-118.2643452&destination=34.0422533,-118.2599014&travelmode=driving&dir_action=navigate'>
+                <Button
+                  variant='extended'
+                  size='small'
+                  color='primary'
+                  aria-label='directions'
+                  style={{ marginRight: 2 }}
+                  // onClick={() => {
+                  //   getDirections();
+                  // }}
+                  // className={classes.margin}
+                >
+                  <DirectionsOutlinedIcon size='small' />
+                </Button>
+              </a>
             </div>
           </InfoWindow>
         )}
