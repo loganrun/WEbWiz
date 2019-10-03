@@ -177,6 +177,7 @@ const GMap = ({ searchLocation }) => {
                   // className={classes.margin}
                 >
                   <DirectionsOutlinedIcon size='small' />
+                  <Typography variant='subtitle2'>Take Me There!!</Typography>
                 </Button>
               </a>
             </div>
