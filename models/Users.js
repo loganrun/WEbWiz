@@ -20,6 +20,9 @@ const UserSchema = new mongoose.Schema({
   userName: {
     type: String,
     required: true
+  },
+  promotions: {
+    type: String
   }
 });
 

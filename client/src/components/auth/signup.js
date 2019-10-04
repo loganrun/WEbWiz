@@ -62,6 +62,10 @@ const SignUp = ({ signUp, isLoggedIn }) => {
     lastName: yup
       .string()
       .label("Last name")
+      .required(),
+    userName: yup
+      .string()
+      .label("Username")
       .required()
   });
 
@@ -89,7 +93,7 @@ const SignUp = ({ signUp, isLoggedIn }) => {
             promotions: true
           }}
           onSubmit={async (values, { setSubmitting, resetForm }) => {
-            console.log(values);
+            //console.log(values);
             await signUp(values);
             setSubmitting(false);
             resetForm();

@@ -16,7 +16,7 @@ import { useImmer } from "use-immer";
 import DirectionsOutlinedIcon from "@material-ui/icons/DirectionsOutlined";
 import Button from "@material-ui/core/Button";
 import queryString from "query-string";
-import hereIcon from "../../assets/images/circle_blue3.png";
+import hereIcon from "../../assets/images/circle_blue.png";
 
 const GMap = ({ searchLocation }) => {
   const marker = useSelector(
