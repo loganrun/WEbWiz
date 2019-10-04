@@ -1,6 +1,6 @@
 const express = require("express");
 const connectDB = require("./config/db");
-const path = require('path')
+const path = require("path");
 
 const app = express();
 connectDB();
@@ -9,6 +9,7 @@ app.use(express.json({ extended: false }));
 
 app.use("/api/auth", require("./routes/api/auth"));
 app.use("/api/users", require("./routes/api/users"));
+app.use("/api/partners", require("./routes/api/partners"));
 app.use("/api/bathrooms", require("./routes/api/bathroom"));
 app.use("/api/restaurants", require("./routes/api/restaurant"));
 app.use("/api/bathReview", require("./routes/api/bathReview"));
