@@ -16,10 +16,10 @@ router.post(
       .not()
       .isEmpty(),
     check("email", "Please provide a valid email address").isEmail(),
-    check("userId", "Password must be at least 6 characters").isLength({
+    check("userId", "Please login").isLength({
       min: 6
     }),
-    check("userName", "Please provide a phone number")
+    check("userName", "Please provide a username")
       .not()
       .isEmpty()
   ],
@@ -29,7 +29,7 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { lastName, firstName, userName, password, email, userId } = req.body;
+    const { lastName, firstName, userName, email, userId } = req.body;
 
     try {
       let user = await User.findOne({ email });
@@ -41,7 +41,6 @@ router.post(
       user = new User({
         firstName,
         lastName,
-        password,
         email,
         userName,
         userId

@@ -28,7 +28,7 @@ router.post(
       .not()
       .isEmpty(),
     check("email", "Please provide a valid email address").isEmail(),
-    check("userId", "Password must be at least 6 characters").isLength({
+    check("userId", "Please login").isLength({
       min: 6
     }),
     check("phone", "Please provide a phone number")
