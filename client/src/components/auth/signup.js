@@ -41,7 +41,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const SignUp = ({signUp, isLoggedIn}) => {
+const SignUp = ({ signUp, isLoggedIn }) => {
   const classes = useStyles();
   const validationSchema = yup.object().shape({
     email: yup
@@ -65,8 +65,8 @@ const SignUp = ({signUp, isLoggedIn}) => {
       .required()
   });
 
-  if (isLoggedIn){
-    return <Redirect to='/bathMap'/>
+  if (isLoggedIn) {
+    return <Redirect to='/bathMap' />;
   }
 
   return (
@@ -85,6 +85,7 @@ const SignUp = ({signUp, isLoggedIn}) => {
             lastName: "",
             email: "",
             password: "",
+            userName: "",
             promotions: true
           }}
           onSubmit={async (values, { setSubmitting, resetForm }) => {
@@ -95,7 +96,7 @@ const SignUp = ({signUp, isLoggedIn}) => {
           }}
           validationSchema={validationSchema}
         >
-          {({handleSubmit, isSubmitting}) => (
+          {({ handleSubmit, isSubmitting }) => (
             <Form className={classes.form} onSubmit={handleSubmit}>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
@@ -148,6 +149,18 @@ const SignUp = ({signUp, isLoggedIn}) => {
                   />
                 </Grid>
                 <Grid item xs={12}>
+                  <Field
+                    variant='outlined'
+                    required
+                    fullWidth
+                    id='userName'
+                    label='Username'
+                    name='userName'
+                    autoComplete='username'
+                    component={TextField}
+                  />
+                </Grid>
+                <Grid item xs={12}>
                   <FormControlLabel
                     control={<Checkbox color='primary' />}
                     label='I want to receive coupons, special discounts, promotions and updates via email.'
@@ -181,13 +194,15 @@ const SignUp = ({signUp, isLoggedIn}) => {
   );
 };
 
-const mapStateToProps = ({firebase}) => ({
-  isLoggedIn: firebase.auth.uid,
+const mapStateToProps = ({ firebase }) => ({
+  isLoggedIn: firebase.auth.uid
 });
 
 const mapDispatchToProps = {
   signUp: actions.signUp
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(SignUp)
-
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SignUp);
