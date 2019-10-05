@@ -169,7 +169,7 @@ const GMap = ({ searchLocation }) => {
               <Typography variant='subtitle2'>
                 {selectedBath.directions}
               </Typography>
-              <a target='_blank' href={navLink}>
+              <a target='_blank' href={navLink} rel='noreferrer noopener'>
                 <Button
                   variant='extended'
                   size='small'
