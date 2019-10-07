@@ -9,7 +9,7 @@ import BathList from "../maps/bathList";
 //import {usePosition} from '../../utils/position';
 import * as actions from "../../actions";
 import { connect } from "react-redux";
-import { useSelector } from "react-redux";
+//import { useSelector } from "react-redux";
 import axios from "axios";
 //import { mergeClasses } from "@material-ui/styles";
 
@@ -42,9 +42,9 @@ const gridStyles = makeStyles(theme => ({
 const BathMap = ({ loadBathroom }) => {
   const [loading, setLoading] = useState({ loading: true });
 
-  const initLocation = useSelector(
-    state => state.location.initlocation.payload
-  );
+  // const initLocation = useSelector(
+  //   state => state.location.initlocation.payload
+  // );
 
   const loc = localStorage.getItem("initialPosition");
   const initLoc = JSON.parse(loc);
