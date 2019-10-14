@@ -1,20 +1,28 @@
 import * as actions from "./types";
-import axios from "axios";
+//import axios from "axios";
 export const signUp = data => async (
   dispatch,
   getState,
   { getFirebase, getFirestore }
 ) => {
   const firebase = getFirebase();
-  //const firestore = getFirestore();
+  const firestore = getFirestore();
   try {
     const res = await firebase
       .auth()
       .createUserWithEmailAndPassword(data.email, data.password);
     console.log(data);
     console.log(res);
-    createUser(data, res);
+    //createUser(data, res);
+    const user = firebase.auth().currentUser;
+    await user.sendEmailVerification();
 
+    await firestore
+      .collection("users")
+      .doc(res.user.uid)
+      .set({
+        email: data.email
+      });
     dispatch({ type: actions.SIGN_UP_SUCCESS });
   } catch (err) {
     console.log(err.message);
@@ -22,23 +30,23 @@ export const signUp = data => async (
   }
 };
 
-export const createUser = (data, res) => {
-  axios
-    .post("http://localhost:5000/api/users", {
-      firstName: data.firstName,
-      lastName: data.lastName,
-      email: data.email,
-      userName: data.userName,
-      userId: res.user.uid,
-      promotions: data.promotions
-    })
-    .then(response => {
-      console.log(response);
-    })
-    .catch(error => {
-      throw error;
-    });
-};
+// export const createUser = (data, res) => {
+//   axios
+//     .post("http://localhost:5000/api/users", {
+//       firstName: data.firstName,
+//       lastName: data.lastName,
+//       email: data.email,
+//       userName: data.userName,
+//       userId: res.user.uid,
+//       promotions: data.promotions
+//     })
+//     .then(response => {
+//       console.log(response);
+//     })
+//     .catch(error => {
+//       throw error;
+//     });
+// };
 
 export const signIn = data => async (dispatch, getState, { getFirebase }) => {
   const firebase = getFirebase();
