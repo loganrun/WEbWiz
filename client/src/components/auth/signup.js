@@ -3,7 +3,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { TextField, CheckboxWithLabel } from "formik-material-ui";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
+//import FormControlLabel from "@material-ui/core/FormControlLabel";
 //import Checkbox from "@material-ui/core/Checkbox";
 import { Link, Redirect } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
@@ -46,7 +46,10 @@ const SignUp = ({ initialLocation, signUp, isLoggedIn }) => {
   const classes = useStyles();
   const position = usePosition(true);
   initialLocation(position);
-  console.log(position);
+  //console.log(position);
+  React.useEffect(() => {
+    localStorage.setItem("initialPosition", JSON.stringify(position));
+  });
 
   const validationSchema = yup.object().shape({
     email: yup
