@@ -8,31 +8,21 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  address: {
-    street: String,
-    city: String,
-    state: String,
-    zipcode: String
-  },
-  phone: {
-    type: String,
-    required: true
-  },
   email: {
     type: String,
     required: true,
     unique: true
   },
-  title: {
+  userId: {
+    type: String,
+    required: true
+  },
+  userName: {
+    type: String,
+    required: true
+  },
+  promotions: {
     type: String
-  },
-  businessName: {
-    type: String,
-    required: true
-  },
-  password: {
-    type: String,
-    required: true
   }
 });
 

@@ -3,8 +3,8 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { TextField, CheckboxWithLabel } from "formik-material-ui";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
+//import FormControlLabel from "@material-ui/core/FormControlLabel";
+//import Checkbox from "@material-ui/core/Checkbox";
 import { Link, Redirect } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import { Formik, Form, Field } from "formik";
@@ -15,6 +15,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import { usePosition } from "../../utils/position";
 
 const useStyles = makeStyles(theme => ({
   "@global": {
@@ -41,32 +42,43 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const SignUp = ({signUp, isLoggedIn}) => {
+const SignUp = ({ initialLocation, signUp, isLoggedIn }) => {
   const classes = useStyles();
+  const position = usePosition(true);
+  initialLocation(position);
+  //console.log(position);
+  React.useEffect(() => {
+    localStorage.setItem("initialPosition", JSON.stringify(position));
+  });
+
   const validationSchema = yup.object().shape({
     email: yup
       .string()
       .email()
       .label("Email")
-      .required(),
-    password: yup
-      .string()
-      .label("Password")
       .required()
-      .min(8)
-      .max(20),
-    firstName: yup
-      .string()
-      .label("First name")
-      .required(),
-    lastName: yup
-      .string()
-      .label("Last name")
-      .required()
+    // password: yup
+    //   .string()
+    //   .label("Password")
+    //   .required()
+    //   .min(8)
+    //   .max(20),
+    // firstName: yup
+    //   .string()
+    //   .label("First name")
+    //   .required(),
+    // lastName: yup
+    //   .string()
+    //   .label("Last name")
+    //   .required(),
+    // userName: yup
+    //   .string()
+    //   .label("Username")
+    //   .required()
   });
 
-  if (isLoggedIn){
-    return <Redirect to='/bathMap'/>
+  if (isLoggedIn) {
+    return <Redirect to='/bathMap' />;
   }
 
   return (
@@ -84,22 +96,23 @@ const SignUp = ({signUp, isLoggedIn}) => {
             firstName: "",
             lastName: "",
             email: "",
-            password: "",
+            password: "12345678",
+            userName: "",
             promotions: true
           }}
           onSubmit={async (values, { setSubmitting, resetForm }) => {
-            console.log(values);
+            //console.log(values);
             await signUp(values);
             setSubmitting(false);
             resetForm();
           }}
           validationSchema={validationSchema}
         >
-          {({handleSubmit, isSubmitting}) => (
+          {({ handleSubmit, isSubmitting }) => (
             <Form className={classes.form} onSubmit={handleSubmit}>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
-                  <Field
+                  {/* <Field
                     autoComplete='fname'
                     name='firstName'
                     variant='outlined'
@@ -108,10 +121,10 @@ const SignUp = ({signUp, isLoggedIn}) => {
                     id='firstName'
                     label='First Name'
                     component={TextField}
-                  />
+                  /> */}
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <Field
+                  {/* <Field
                     variant='outlined'
                     required
                     fullWidth
@@ -120,7 +133,7 @@ const SignUp = ({signUp, isLoggedIn}) => {
                     name='lastName'
                     autoComplete='lname'
                     component={TextField}
-                  />
+                  /> */}
                 </Grid>
                 <Grid item xs={12}>
                   <Field
@@ -135,7 +148,7 @@ const SignUp = ({signUp, isLoggedIn}) => {
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <Field
+                  {/* <Field
                     variant='outlined'
                     required
                     fullWidth
@@ -145,15 +158,27 @@ const SignUp = ({signUp, isLoggedIn}) => {
                     id='password'
                     autoComplete='current-password'
                     component={TextField}
-                  />
+                  /> */}
                 </Grid>
                 <Grid item xs={12}>
-                  <FormControlLabel
+                  {/* <Field
+                    variant='outlined'
+                    required
+                    fullWidth
+                    id='userName'
+                    label='Username'
+                    name='userName'
+                    autoComplete='username'
+                    component={TextField}
+                  /> */}
+                </Grid>
+                <Grid item xs={12}>
+                  {/* <FormControlLabel
                     control={<Checkbox color='primary' />}
                     label='I want to receive coupons, special discounts, promotions and updates via email.'
                     name='promotions'
                     component={CheckboxWithLabel}
-                  />
+                  /> */}
                 </Grid>
               </Grid>
               <Button
@@ -168,9 +193,9 @@ const SignUp = ({signUp, isLoggedIn}) => {
               </Button>
               <Grid container justify='flex-end'>
                 <Grid item>
-                  <Link to='login' variant='body2'>
+                  {/* <Link to='login' variant='body2'>
                     Already have an account? Sign in
-                  </Link>
+                  </Link> */}
                 </Grid>
               </Grid>
             </Form>
@@ -181,13 +206,16 @@ const SignUp = ({signUp, isLoggedIn}) => {
   );
 };
 
-const mapStateToProps = ({firebase}) => ({
-  isLoggedIn: firebase.auth.uid,
+const mapStateToProps = ({ firebase }) => ({
+  isLoggedIn: firebase.auth.uid
 });
 
 const mapDispatchToProps = {
+  initialLocation: actions.initialLocation,
   signUp: actions.signUp
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(SignUp)
-
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SignUp);
