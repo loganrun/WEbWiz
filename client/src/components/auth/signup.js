@@ -1,8 +1,8 @@
-import React from "react";
+import React,{useState} from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { TextField, CheckboxWithLabel } from "formik-material-ui";
+import { TextField} from "formik-material-ui";
 //import FormControlLabel from "@material-ui/core/FormControlLabel";
 //import Checkbox from "@material-ui/core/Checkbox";
 import { Link, Redirect } from "react-router-dom";
@@ -16,6 +16,9 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { usePosition } from "../../utils/position";
+//import Alert from '../layouts/alerts'
+import { useSelector } from "react-redux";
+//import { STATES } from "mongoose";
 
 const useStyles = makeStyles(theme => ({
   "@global": {
@@ -42,7 +45,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const SignUp = ({ initialLocation, signUp, isLoggedIn }) => {
+const SignUp = ({ initialLocation, signUp, isLoggedIn}) => {
   const classes = useStyles();
   const position = usePosition(true);
   initialLocation(position);
@@ -50,6 +53,12 @@ const SignUp = ({ initialLocation, signUp, isLoggedIn }) => {
   React.useEffect(() => {
     localStorage.setItem("initialPosition", JSON.stringify(position));
   });
+  
+  const initLoc = useSelector(
+    state => state.location.initLocation.payload
+  );
+
+  const [posError, setposError] =  useState(false);
 
   const validationSchema = yup.object().shape({
     email: yup
@@ -80,7 +89,6 @@ const SignUp = ({ initialLocation, signUp, isLoggedIn }) => {
   if (isLoggedIn) {
     return <Redirect to='/bathMap' />;
   }
-
   return (
     <Container component='main' maxWidth='xs'>
       <CssBaseline />
@@ -102,9 +110,12 @@ const SignUp = ({ initialLocation, signUp, isLoggedIn }) => {
           }}
           onSubmit={async (values, { setSubmitting, resetForm }) => {
             //console.log(values);
+            if(!initLoc){
+              setposError(true)
+            }else{
             await signUp(values);
             setSubmitting(false);
-            resetForm();
+            resetForm();}
           }}
           validationSchema={validationSchema}
         >
@@ -206,8 +217,9 @@ const SignUp = ({ initialLocation, signUp, isLoggedIn }) => {
   );
 };
 
-const mapStateToProps = ({ firebase }) => ({
-  isLoggedIn: firebase.auth.uid
+const mapStateToProps = ({ firebase, state }) => ({
+  isLoggedIn: firebase.auth.uid,
+  //initLoc:  state.location.initlocation
 });
 
 const mapDispatchToProps = {

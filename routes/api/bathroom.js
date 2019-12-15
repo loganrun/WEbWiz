@@ -25,7 +25,7 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { name, street, city, state, zipcode, directions } = req.body;
+    const { name, street, city, state, zipcode, directions,latitude,longitude,id,accessible,unisex } = req.body;
 
     try {
       bathroom = new Bathroom({
@@ -36,7 +36,12 @@ router.post(
           state: state,
           zipcode: zipcode
         },
-        directions
+        directions,
+        latitude,
+        longitude,
+        id,
+        accessible,
+        unisex
       });
 
       await bathroom.save();

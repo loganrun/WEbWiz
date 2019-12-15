@@ -20,6 +20,12 @@ const BathroomSchema = new mongoose.Schema({
   date: {
     type: Date,
     default: Date.now
+  },
+  id:{
+    type: String
+  },
+  table:{
+    type: Boolean
   }
 });
 
