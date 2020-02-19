@@ -41,7 +41,11 @@ router.post(
         longitude,
         id,
         accessible,
-        unisex
+        unisex,
+        location: {
+          type: "Point",
+          coordinates: [longitude, latitude]
+        }
       });
 
       await bathroom.save();

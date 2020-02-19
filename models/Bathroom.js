@@ -26,6 +26,16 @@ const BathroomSchema = new mongoose.Schema({
   },
   table:{
     type: Boolean
+  },
+  location:{
+    type: {type: String},
+    coordinates: []
+  },
+  accessible: {
+    type: Boolean
+  }, 
+  unisex:{
+    type: Boolean
   }
 });
 
