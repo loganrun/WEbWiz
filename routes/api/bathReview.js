@@ -25,7 +25,9 @@ router.post(
       bathreview = new BathReview({
         review,
         rating,
-        bathroomId
+        bathroomId,
+        userId,
+        
       });
 
       await bathreview.save();

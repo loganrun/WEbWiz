@@ -3,6 +3,20 @@ const router = express.Router();
 const { check, validationResult } = require("express-validator");
 const Bathroom = require("../../models/Bathroom");
 
+router.get('/',async (req, res) => {
+  try {
+    const bathroom = await Bathroom.find()
+  
+        res.json(bathroom)
+    
+  } catch (err) {
+    console.error(err.message);
+    return res.status(500).send("server error");
+  }
+  
+
+});
+
 router.post(
   "/",
   [

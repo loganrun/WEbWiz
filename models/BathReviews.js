@@ -11,7 +11,7 @@ const BathReviewsSchema = new mongoose.Schema({
   review: {
     type: String
   },
-  score: {
+  rating: {
     type: Number
   },
   profile_Name: {
