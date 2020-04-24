@@ -44,12 +44,10 @@ router.post(
     try {
       bathroom = new Bathroom({
         name,
-        address: {
-          street: street,
-          city: city,
-          state: state,
-          zipcode: zipcode
-        },
+        street,
+        city,
+        state,
+        zipcode,
         directions,
         latitude,
         longitude,

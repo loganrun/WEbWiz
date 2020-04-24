@@ -6,6 +6,19 @@ const { check, validationResult } = require("express-validator");
 //const jwt = require("jsonwebtoken");
 const User = require("../../models/Users");
 
+router.get('/',async (req, res) => {
+  try {
+    const user = await User.find()
+  
+        res.json(user)
+    
+  } catch (err) {
+    console.error(err.message);
+    return res.status(500).send("server error");
+  }
+  
+
+});
 router.post(
   "/",
   [
@@ -35,7 +48,8 @@ router.post(
       userName,
       email,
       userId,
-      promotions
+      phoneNum,
+      service
     } = req.body;
 
     try {
@@ -51,13 +65,15 @@ router.post(
         email,
         userName,
         userId,
-        promotions
+        service,
+        phoneNum
       });
 
       //   const salt = await bcrypt.genSalt(10);
       //   user.password = await bcrypt.hash(password, salt);
 
       await user.save();
+      res.status(201).json(user)
 
       //   const payload = {
       //     user: {

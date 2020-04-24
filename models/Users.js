@@ -21,7 +21,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  promotions: {
+  phoneNum: {
+    type: String
+  },
+  service:  {
     type: String
   }
 });

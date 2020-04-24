@@ -2,13 +2,19 @@ const mongoose = require("mongoose");
 const BathroomSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true
   },
-  address: {
-    street: String,
-    city: String,
-    state: String,
-    zipcode: String
+  
+  street: {
+      type: String
+  },
+  city: {
+      type: String
+  },
+  state: {
+      type: String
+  },
+  zipcode: {
+      type: String
   },
   directions: {
     type: String
@@ -24,7 +30,7 @@ const BathroomSchema = new mongoose.Schema({
   id:{
     type: String
   },
-  table:{
+  changing_table:{
     type: Boolean
   },
   location:{
@@ -36,6 +42,9 @@ const BathroomSchema = new mongoose.Schema({
   }, 
   unisex:{
     type: Boolean
+  },
+  paid:{
+      type: Boolean
   }
 });
 
