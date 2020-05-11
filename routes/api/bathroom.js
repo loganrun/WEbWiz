@@ -27,7 +27,7 @@ router.get('/',async (req, res) => {
     };
 
     const latitude = req.body
-    const longitude = req.params.lng
+    const longitude = req.params
     console.log(latitude)
     console.log(longitude)
     
