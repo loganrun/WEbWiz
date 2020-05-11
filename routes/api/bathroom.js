@@ -26,8 +26,8 @@ router.get('/',async (req, res) => {
         allowDiskUse: false
     };
 
-    const latitude = req.body.params
-    const longitude = req.query
+    const latitude = req.query.lat
+    const longitude = req.query.lng
     console.log(latitude)
     console.log(longitude)
     
