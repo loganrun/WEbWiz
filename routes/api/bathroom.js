@@ -26,8 +26,8 @@ router.get('/',async (req, res) => {
         allowDiskUse: false
     };
 
-    const latitude = parseFloat(req.query.latitude)
-    const longitude = parseFloat(req.query.longitude)
+    const latitude = parseFloat(req.params.latitude)
+    const longitude = parseFloat(req.params.longitude)
     
     const pipeline = [
         {
