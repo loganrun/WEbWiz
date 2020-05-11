@@ -8,65 +8,65 @@ const mongodb = require("mongodb");
 const client = mongodb.MongoClient;
 
 router.get('/',async (req, res) => {
-  // try {
-  //   const bathroom = await Bathroom.find()
+  try {
+    const bathroom = await Bathroom.find()
   
-  //       res.json(bathroom)
+        res.json(bathroom)
     
-  // } catch (err) {
-  //   console.error(err.message);
-  //   return res.status(500).send("server error");
-  // }
-  client.connect(url, {useNewUrlParser: true},function (err, client) {
+  } catch (err) {
+    console.error(err.message);
+    return res.status(500).send("server error");
+  }
+//   client.connect(url, {useNewUrlParser: true},function (err, client) {
     
-    const db = client.db("Whizbase");
-    const collection = db.collection("bathrooms");
+//     const db = client.db("Whizbase");
+//     const collection = db.collection("bathrooms");
     
-    const options = {
-        allowDiskUse: false
-    };
+//     const options = {
+//         allowDiskUse: false
+//     };
 
-    const latitude = req.params.lat
-    const longitude = req.params.lng
+//     const latitude = req.params.lat
+//     const longitude = req.params.lng
     
-    const pipeline = [
-        {
-            "$geoNear": {
-                "near": {
-                    "type": "Point",
-                    "coordinates": [
-                      longitude,
-                      latitude
-                    ]
-                },
-                "distanceField": "dist.calculated",
-                "maxDistance": 40000.0,
-                "spherical": true,
-                "distanceMultiplier": 1/1609.344
-            }
-        }
-    ];
+//     const pipeline = [
+//         {
+//             "$geoNear": {
+//                 "near": {
+//                     "type": "Point",
+//                     "coordinates": [
+//                       longitude,
+//                       latitude
+//                     ]
+//                 },
+//                 "distanceField": "dist.calculated",
+//                 "maxDistance": 40000.0,
+//                 "spherical": true,
+//                 "distanceMultiplier": 1/1609.344
+//             }
+//         }
+//     ];
     
-    const cursor = collection.aggregate(pipeline, options).toArray(function(err, result) {
-      res.send(result);
-    }, 
-    function(err) {
-      console.log(err)
-        client.close();
-    });
+//     const cursor = collection.aggregate(pipeline, options).toArray(function(err, result) {
+//       res.send(result);
+//     }, 
+//     function(err) {
+//       console.log(err)
+//         client.close();
+//     });
     
-    //  cursor.forEach(
-    //      function(doc) {
-    //          res.send();
-        //  }, 
-        //  function(err) {
-        //      client.close();
-        //  }
-    //  );
+//     //  cursor.forEach(
+//     //      function(doc) {
+//     //          res.send();
+//         //  }, 
+//         //  function(err) {
+//         //      client.close();
+//         //  }
+//     //  );
     
-    // Created with Studio 3T, the IDE for MongoDB - https://studio3t.com/
+//     // Created with Studio 3T, the IDE for MongoDB - https://studio3t.com/
     
-})
+// })
 
 });
 
