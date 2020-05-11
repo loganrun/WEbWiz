@@ -13,15 +13,14 @@ const BathroomSchema = new mongoose.Schema({
   state: {
       type: String
   },
-  zipcode: {
-      type: String
-  },
   directions: {
     type: String
   },
-  coordinates: {
-    latitude: Number,
-    Longitude: Number
+  latitude: {
+    type: Number,
+  },
+  longitude:{
+    type: Number
   },
   date: {
     type: Date,
