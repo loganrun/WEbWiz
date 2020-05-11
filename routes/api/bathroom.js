@@ -28,8 +28,8 @@ router.get('/',async (req, res) => {
 
     const latitude = req.query.lat
     const longitude = req.query.lng
-    //console.log(latitude)
-    //console.log(longitude)
+    console.log(latitude)
+    console.log(longitude)
     
     const pipeline = [
         {
