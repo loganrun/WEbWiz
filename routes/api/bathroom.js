@@ -26,9 +26,10 @@ router.get('/',async (req, res) => {
         allowDiskUse: false
     };
 
-    const latitude = req
+    const latitude = req.body
     const longitude = req.params.lng
     console.log(latitude)
+    console.log(longitude)
     
     const pipeline = [
         {
