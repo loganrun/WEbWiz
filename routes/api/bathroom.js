@@ -8,67 +8,97 @@ const mongodb = require("mongodb");
 const client = mongodb.MongoClient;
 
 router.get('/',async (req, res) => {
-  // try {
-  //   const bathroom = await Bathroom.find()
-  
-  //       res.json(bathroom)
-    
-  // } catch (err) {
-  //   console.error(err.message);
-  //   return res.status(500).send("server error");
-  // }
-  client.connect(url, {useNewUrlParser: true},function (err, client) {
-    
-    const db = client.db("Whizbase");
-    const collection = db.collection("bathrooms");
-    
-    const options = {
-        allowDiskUse: false
-    };
 
-    const latitude = req.query.lat
-    const longitude = req.query.lng
-    console.log(latitude)
-    console.log(longitude)
+   try {
+     const bathroom = await Bathroom.aggregate([
+      {
+          "$geoNear": {
+              "near": {
+                  "type": "Point",
+                  "coordinates": [
+                    parseFloat(req.query.lng),//lng, //-118.243683,
+                    parseFloat(req.query.lat) //lat  //34.052235
+                  ]
+              },
+              "distanceField": "dist.calculated",
+              "maxDistance": 40000.0,
+              "spherical": true,
+              "distanceMultiplier": .00062137119
+          }
+      }
+    ])
+  
+     console.log(bathroom)    
+     res.json(bathroom)
     
-    const pipeline = [
-        {
-            "$geoNear": {
-                "near": {
-                    "type": "Point",
-                    "coordinates": [
-                      longitude,
-                      latitude
-                    ]
-                },
-                "distanceField": "dist.calculated",
-                "maxDistance": 40000.0,
-                "spherical": true,
-                "distanceMultiplier": 1/1609.344
-            }
-        }
-    ];
+   } catch (err) {
+     console.error(err.message);
+     return res.status(500).send("server error");
+   }
+  // client.connect(url, {useNewUrlParser: true},function (err, client) {
+  //   const db = client.db("Whizbase");
+  //   const collection = db.collection("bathrooms");
     
-    const cursor = collection.aggregate(pipeline, options).toArray(function(err, result) {
-      res.send(result);
-    }, 
-    function(err) {
-      console.log(err)
-        client.close();
-    });
+  //   // const options = {
+  //   //     allowDiskUse: false
+  //   // };
+
+  //   const latitude = req.query.lat
+  //   const longitude = req.query.lng
+  //   console.log(latitude)
+  //   console.log(longitude)
     
-    //  cursor.forEach(
-    //      function(doc) {
-    //          res.send();
-        //  }, 
-        //  function(err) {
-        //      client.close();
-        //  }
-    //  );
+    // const pipeline = [
+    //     {
+    //         "$geoNear": {
+    //             "near": {
+    //                 "type": "Point",
+    //                 "coordinates": [
+    //                   longitude,
+    //                   latitude
+    //                 ]
+    //             },
+    //             "distanceField": "dist.calculated",
+    //             "maxDistance": 40000.0,
+    //             "spherical": true,
+    //             "distanceMultiplier": .00062137119
+    //         }
+    //     }
+    // ];
     
-    // Created with Studio 3T, the IDE for MongoDB - https://studio3t.com/
+  //   const cursor = collection.find() 
+  //     console.log(cursor)
+  //     // res.send(result);
+  //     // cursor.forEach(
+  //     //   function(doc) {
+  //     //       console.log(doc);
     
-})
+  //   // function(err) {
+  //   //   console.log(err)
+  //   //     client.close();
+  //   // }
+  //   //aggregate(pipeline, options)
+  //   // cursor.forEach(
+  //   //     function(doc) {
+  //   //         console.log(doc);
+  //   //     }, 
+  //   //     function(err) {
+  //   //         client.close();
+  //   //     }
+  //   // )
+  //   //.toArray(function(err, result) {
+  //   //  cursor.forEach(
+  //   //      function(doc) {
+  //   //          res.send();
+  //       //  }, 
+  //       //  function(err) {
+  //       //      client.close();
+  //       //  }
+  //   //  );
+    
+  //   // Created with Studio 3T, the IDE for MongoDB - https://studio3t.com/
+    
+
 
 });
 
