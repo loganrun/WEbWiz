@@ -50,6 +50,9 @@ const BathroomSchema = new mongoose.Schema({
   },
   icon:{
     type: String
+  },
+  logo:{
+    type: String
   }
 });
 
