@@ -21,21 +21,21 @@ router.get('/',async (req, res) => {
 });
 router.post(
   "/",
-  [
-    check("lastName", "Please enter your last name")
-      .not()
-      .isEmpty(),
-    check("firstName", "Please enter your first name")
-      .not()
-      .isEmpty(),
-    check("email", "Please provide a valid email address").isEmail(),
-    check("userId", "Please login").isLength({
-      min: 6
-    }),
-    check("userName", "Please provide a username")
-      .not()
-      .isEmpty()
-  ],
+  // [
+  //   check("lastName", "Please enter your last name")
+  //     .not()
+  //     .isEmpty(),
+  //   check("firstName", "Please enter your first name")
+  //     .not()
+  //     .isEmpty(),
+  //   check("email", "Please provide a valid email address").isEmail(),
+  //   check("userId", "Please login").isLength({
+  //     min: 6
+  //   }),
+  //   check("userName", "Please provide a username")
+  //     .not()
+  //     .isEmpty()
+  // ],
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -53,12 +53,12 @@ router.post(
     } = req.body;
 
     try {
-      let user = await User.findOne({ email });
-      if (user) {
-        return res
-          .status(400)
-          .json({ errors: [{ msg: "User already exists" }] });
-      }
+      // let user = await User.findOne({ email });
+      // if (user) {
+      //   return res
+      //     .status(400)
+      //     .json({ errors: [{ msg: "User already exists" }] });
+      // }
       user = new User({
         firstName,
         lastName,
