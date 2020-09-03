@@ -18,7 +18,7 @@ router.get('/',async (req, res) => {
   }
   
 
-});
+ });
 router.post(
   "/",
   // [
@@ -35,12 +35,12 @@ router.post(
   //   check("userName", "Please provide a username")
   //     .not()
   //     .isEmpty()
-  // ],
+  //// ],
   async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
+    // const errors = validationResult(req);
+    // if (!errors.isEmpty()) {
+    //   return res.status(400).json({ errors: errors.array() });
+    // }
 
     const {
       lastName,
@@ -53,12 +53,12 @@ router.post(
     } = req.body;
 
     try {
-      // let user = await User.findOne({ email });
-      // if (user) {
-      //   return res
-      //     .status(400)
-      //     .json({ errors: [{ msg: "User already exists" }] });
-      // }
+      let user = await User.findOne({ userId });
+      if (user) {
+        return res
+          .status(400)
+          .json({ errors: [{ msg: "User already exists" }] });
+      }
       user = new User({
         firstName,
         lastName,

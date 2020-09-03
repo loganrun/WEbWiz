@@ -60,7 +60,7 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { name, street, city, state, directions,latitude,longitude,id,accessible,unisex } = req.body;
+    const { name, street, city, state, directions,latitude,longitude,id,accessible,unisex,icon,ad,logo } = req.body;
 
     try {
       bathroom = new Bathroom({
@@ -74,6 +74,9 @@ router.post(
         id,
         accessible,
         unisex,
+        icon,
+        ad,
+        logo,
         location: {
           type: "Point",
           coordinates: [longitude, latitude]
