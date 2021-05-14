@@ -11,7 +11,7 @@ router.get('/',async (req, res) => {
   try {
     const user = await User.findOne({userId})
   
-        res.json(user)
+        res.json(user.userName)
     
   } catch (err) {
     console.error(err.message);
