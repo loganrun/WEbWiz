@@ -7,8 +7,9 @@ const { check, validationResult } = require("express-validator");
 const User = require("../../models/Users");
 
 router.get('/',async (req, res) => {
+  const userId = req.query.userId
   try {
-    const user = await User.find()
+    const user = await User.findOne({userId})
   
         res.json(user)
     
