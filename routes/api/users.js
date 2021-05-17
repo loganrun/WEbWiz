@@ -98,4 +98,21 @@ router.post(
   }
 );
 
+router.patch('/:userId', async (req,res) =>{
+
+  try{
+    const user = await User.findOne({userId: req.params.userId});
+    if(req.body.userName) {
+    user.userName = req.body.userName
+  }
+  await user.save()
+  res.send(user.userName)
+}catch{
+  res.status(404)
+  res.send({error: "User Not Found"})
+}
+
+
+})
+
 module.exports = router;
