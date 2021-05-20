@@ -101,6 +101,12 @@ router.post(
 router.patch('/:userId', async (req,res) =>{
 
   try{
+    let profile = await User.findOne({ userName: req.body.userName });
+      if (profile) {
+        return res
+          .status(400)
+          .json({ errors: [{ msg: "Profile name already exist. Please choose another" }] });
+      }
     const user = await User.findOne({userId: req.params.userId});
     if(req.body.userName) {
     user.userName = req.body.userName
