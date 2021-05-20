@@ -28,7 +28,7 @@ router.get('/',async (req, res) => {
       }
     ])
   
-     console.log(bathroom)    
+         
      res.json(bathroom)
     
    } catch (err) {
