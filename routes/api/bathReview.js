@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const { check, validationResult } = require("express-validator");
 const BathReview = require("../../models/BathReviews");
+const Bathroom = require("../../models/Bathroom");
+//const RateReview = require("../../middleware/RateReview")
 
 router.post(
   "/",
@@ -19,25 +21,47 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { review, rating, userId, bathroomId } = req.body;
+    const { review, userId, bathroomId,userName, rating } = req.body;
 
     try {
-      bathreview = new BathReview({
+      const restroom = await Bathroom.findOne({_id:bathroomId});
+
+      if(!restroom){
+        return res
+          .status(400)
+          .json({ errors: [{ msg: "Restroom does not exists" }] });
+      }
+      RateReview(restroom, rating);
+
+      bathReview = new BathReview({
         review,
-        rating,
         bathroomId,
         userId,
-        
+        userName, rating
       });
 
-      await bathreview.save();
+      await bathReview.save();
 
-      return res.json(bathreview);
+      return res.json(bathReview);
     } catch (err) {
       console.error(err.message);
       res.status(500).send("server error");
     }
   }
 );
+
+const RateReview = (restroom, rating) =>{
+  console.log(restroom)
+  console.log(rating)
+
+  router.patch('/', async (req,res) =>{
+
+    const newRating =  restroom.rating + rating;
+    console.log(newRating)
+    const newCount = restroom.count + 1;
+    console.log(newCount)
+  })
+
+}
 
 module.exports = router;

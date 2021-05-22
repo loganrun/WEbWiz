@@ -53,6 +53,12 @@ const BathroomSchema = new mongoose.Schema({
   },
   logo:{
     type: String
+  }, 
+  rating:{
+    type: Number
+  },
+  count:{
+    type: Number
   }
 });
 

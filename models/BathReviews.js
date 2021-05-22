@@ -2,24 +2,24 @@ const mongoose = require("mongoose");
 const BathReviewsSchema = new mongoose.Schema({
   bathroomId:{
     type: mongoose.Schema.Types.ObjectId,
-    ref: "bathroom"
+    ref: "Bathroom"
   },
   userId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "user"
+    ref: "User"
   },
   review: {
     type: String
   },
-  rating: {
-    type: Number
-  },
-  profile_Name: {
+  userName: {
     type: String
   },
   date: {
     type: Date,
     default: Date.now
+  },
+  rating:{
+    type: Number
   }
 });
 
