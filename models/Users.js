@@ -25,6 +25,9 @@ const UserSchema = new mongoose.Schema({
   },
   service:  {
     type: String
+  },
+  count: {
+    type: Number
   }
 });
 

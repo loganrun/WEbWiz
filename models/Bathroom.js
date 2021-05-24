@@ -59,6 +59,9 @@ const BathroomSchema = new mongoose.Schema({
   },
   count:{
     type: Number
+  }, 
+  totalRatings:{
+    type: Number
   }
 });
 
