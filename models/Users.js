@@ -28,6 +28,9 @@ const UserSchema = new mongoose.Schema({
   },
   count: {
     type: Number
+  },
+  checkIn: {
+    type: Number
   }
 });
 

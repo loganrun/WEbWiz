@@ -39,10 +39,11 @@ router.post(
       }
       
       let userId = user._id;
+      const userCount = user.count + 1;
       const newCount = restroom.count + 1;
       const newRating= restroom.totalRatings + rating;
-      const newAvg =  newRating/ newCount;
-      //const newAvg = Math.round(interAvg);
+      const interAvg =  newRating/ newCount;
+      const newAvg = Math.round(interAvg * 10)/10;
 
       try{
 
@@ -86,8 +87,6 @@ router.post(
         res.status(500).send("server error");
       };
 
-      
-
 
       bathReview = new BathReview({
         review,
@@ -98,7 +97,7 @@ router.post(
 
       await bathReview.save();
 
-      return res.json(bathReview);
+      return res.status(200).send("Thanks for the review! You now have " + userCount + " Whizz review points!");
     } catch (err) {
       console.error(err.message);
       res.status(500).send("server error");

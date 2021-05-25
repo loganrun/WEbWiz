@@ -121,4 +121,26 @@ router.patch('/:userId', async (req,res) =>{
 
 })
 
+router.post('/checkin', async (req,res) =>{
+  
+  try{
+    const user = await User.findOne({userId: req.body.userId});
+    if(!user){
+      return res
+          .status(400)
+          .json({ errors: [{ msg: "You have to be logged in to use this feature." }] });
+    }
+  
+    newCheckin = user.checkIn + 2;
+    const userUpdateCount= await Users.findByIdAndUpdate({_id: user._id}, {"checkIn": newCheckin}, {new:true})
+        //console.log(userUpdateCount.checkIn)
+        res.status(200).json('Thanks for checking in! You now have ' + userUpdateCount.checkIn + ' Whizz points!')
+
+  }catch(err){
+    console.error(err.message);
+    res.status(500).send("server error");
+
+  }
+})
+
 module.exports = router;
