@@ -20,8 +20,8 @@ router.get('/',async (req, res) => {
                     parseFloat(req.query.lat) //lat  //34.052235
                   ]
               },
-              "distanceField": "dist.calculated",
-              "maxDistance": 40000.0,
+              "distanceField": "distance",
+              "maxDistance": 16093.0,
               "spherical": true,
               "distanceMultiplier": .00062137119
           }
