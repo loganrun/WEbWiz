@@ -27,7 +27,7 @@ const BathroomSchema = new mongoose.Schema({
     default: Date.now
   },
   id:{
-    type: Number
+    type: String
   },
   changing_table:{
     type: Boolean
@@ -62,6 +62,12 @@ const BathroomSchema = new mongoose.Schema({
   }, 
   totalRatings:{
     type: Number
+  },
+  lowerCard:{
+    type: String
+  },
+  verified:{
+    type: String
   }
 });
 

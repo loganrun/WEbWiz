@@ -143,4 +143,7 @@ router.post('/checkin', async (req,res) =>{
   }
 })
 
+
+
+
 module.exports = router;
