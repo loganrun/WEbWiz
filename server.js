@@ -14,6 +14,7 @@ app.use("/api/bathrooms", require("./routes/api/bathroom"));
 app.use("/api/restaurants", require("./routes/api/restaurant"));
 app.use("/api/bathReview", require("./routes/api/bathReview"));
 app.use("/api/restReview", require("./routes/api/restReview"));
+app.use("/api/unverified", require("./routes/api/unverified"));
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));

@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const BathroomSchema = new mongoose.Schema({
+const UnverifiedSchema = new mongoose.Schema({
   name: {
     type: String,
   },
@@ -27,7 +27,7 @@ const BathroomSchema = new mongoose.Schema({
     default: Date.now
   },
   id:{
-    type: String
+    type: Number
   },
   changing_table:{
     type: Boolean
@@ -53,22 +53,8 @@ const BathroomSchema = new mongoose.Schema({
   },
   logo:{
     type: String
-  }, 
-  rating:{
-    type: Number
-  },
-  count:{
-    type: Number
-  }, 
-  totalRatings:{
-    type: Number
-  },
-  lowerCard:{
-    type: String
-  },
-  verified:{
-    type: String
   }
+
 });
 
-module.exports = Bathroom = mongoose.model("bathroom", BathroomSchema);
+module.exports = Unverified = mongoose.model("unverified", UnverifiedSchema);

@@ -9,9 +9,9 @@ const User = require("../../models/Users");
 router.get('/',async (req, res) => {
   const userId = req.query.userId
   try {
-    const  user = await User.findOne({ userId })
+    const user = await User.findOne({userId})
   
-        res.json(user)
+        res.json(user.userName)
     
   } catch (err) {
     console.error(err.message);
@@ -84,20 +84,52 @@ router.post(
   }
 );
 
+router.patch('/:userId', async (req,res) =>{
+
+  try{
+    let profile = await User.findOne({ userName: req.body.userName });
+      if (profile) {
+        return res
+          .status(400)
+          .json({ errors: [{ msg: "Profile name already exist. Please choose another" }] });
+      }
+    const user = await User.findOne({userId: req.params.userId});
+    if(req.body.userName) {
+    user.userName = req.body.userName
+  }
+  await user.save()
+  res.send(user.userName)
+}catch{
+  res.status(404)
+  res.send({error: "User Not Found"})
+}
+
+
+})
+
+router.post('/checkin', async (req,res) =>{
+  
+  try{
+    const user = await User.findOne({userId: req.body.userId});
+    if(!user){
+      return res
+          .status(400)
+          .json({ errors: [{ msg: "You have to be logged in to use this feature." }] });
+    }
+  
+    const newCheckin = user.checkIn + 2;
+    const userUpdateCount= await Users.findByIdAndUpdate({_id: user._id}, {"checkIn": newCheckin}, {new:true})
+        //console.log(userUpdateCount.checkIn)
+        res.status(200).json('Thanks for checking in! You now have ' + userUpdateCount.checkIn + ' Whizz points!')
+
+  }catch(err){
+    console.error(err.message);
+    res.status(500).send("server error");
+
+  }
+})
+
+
+
+
 module.exports = router;
-
-//   const payload = {
-      //     user: {
-      //       id: user.id
-      //     }
-      //   };
-
-      //   jwt.sign(
-      //     payload,
-      //     config.get("jwtSecret"),
-      //     { expiresIn: 360000 },
-      //     (err, token) => {
-      //       if (err) throw err;
-      //       res.json({ token });
-      //     }
-      //   );
