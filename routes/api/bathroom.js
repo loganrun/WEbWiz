@@ -100,29 +100,35 @@ router.post(
 
 router.post(
   "/verify",
-  [
-    check("name", "Name is required")
-      .not()
-      .isEmpty(),
-    check("street", "address is required")
-      .not()
-      .isEmpty(),
-    check("city", "Name of City is required")
-      .not()
-      .isEmpty(),
-    check("state", "Name of state is required")
-      .not()
-      .isEmpty()
-  ],
+  // [
+  //   check("name", "Name is required")
+  //     .not()
+  //     .isEmpty(),
+  //   check("street", "address is required")
+  //     .not()
+  //     .isEmpty(),
+  //   check("city", "Name of City is required")
+  //     .not()
+  //     .isEmpty(),
+  //   check("state", "Name of state is required")
+  //     .not()
+  //     .isEmpty()
+  // ],
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { name, street, city, state, directions,latitude,longitude,accessible,unisex,ad,logo,changing_table } = req.body;
+    const { name, street, city, state, directions,latitude,longitude,accessible,unisex,ad,logo,changing_table,id } = req.body;
 
     try {
+      let verify = await Bathroom.findOne({ id });
+      if (verify) {
+        return res
+          .status(400)
+          .json({ errors: [{ msg: "Already verified" }] });
+      }
       bathroom = new Bathroom({
         name,
         street,

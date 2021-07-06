@@ -67,7 +67,9 @@ router.post(
         userName,
         userId,
         service,
-        phoneNum
+        phoneNum,
+        checkIn: 0,
+        count: 0
       });
 
       //   const salt = await bcrypt.genSalt(10);
