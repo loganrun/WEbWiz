@@ -4,7 +4,7 @@ const { check, validationResult } = require("express-validator");
 const BathReview = require("../../models/BathReviews");
 //const Bathroom = require("../../models/Bathroom");
 const Users = require("../../models/Users")
-const Unverified = require("../../models/Unverified")
+const Bathroom = require("../../models/Bathroom")
 
 router.post(
   "/",
@@ -25,7 +25,7 @@ router.post(
     const { review, bathroomId,userName, rating } = req.body;
 
     try {
-      const restroom = await Unverified.findOne({_id:bathroomId});
+      const restroom = await Bathroom.findOne({_id:bathroomId});
       const user = await Users.findOne({userId:req.body.userId});
       
 
